@@ -60,7 +60,6 @@ export default function TaskBox(taskClass) {
           />
           <input type="submit" />
         </form>
-        {/* Add a form here to edit this task */}
       </div>
     </div>
   );

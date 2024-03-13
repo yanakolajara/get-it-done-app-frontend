@@ -31,7 +31,7 @@ export default function UnstagedTasks(arrayOfTasks, setArrayOfTasks) {
 
   return (
     <div className="container unstaged-tasks">
-      <h1>My Tasks Box</h1>
+      <h1>Tasks box</h1>
       <button
         className="btn-create"
         onClick={(e) => {

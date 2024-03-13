@@ -1,9 +1,9 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getTasksFromUserID } from "../../api/api";
-import Task from "./Task";
 import UnstagedTasks from "./UnstagedTasks";
-import "./styles/index.scss";
 import StagedTasks from "./StagedTasks";
+import Task from "./Task";
+import "./styles/index.scss";
 
 export default function DayView() {
   const [arrayOfTasks, setArrayOfTasks] = useState([]);

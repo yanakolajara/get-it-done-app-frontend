@@ -1,0 +1,16 @@
+.navbar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba($color: #ff0000, $alpha: 0.1);
+  height: 80px;
+}
+
+.navbar {
+  height: 50%;
+  background-color: green;
+}
+
+.nav-btn {
+  width: 300px;
+}

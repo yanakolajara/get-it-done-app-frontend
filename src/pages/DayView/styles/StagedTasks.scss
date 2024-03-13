@@ -1,0 +1,14 @@
+.staged_tasks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  height: 80%;
+  margin-right: 64px;
+}
+
+.staged-tasks-container {
+  background-color: rgba($color: #b46e6e, $alpha: 0.1);
+  width: 90%;
+  height: 80%;
+}

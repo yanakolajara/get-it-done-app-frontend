@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TaskContainer from "./TaskContainer";
+import TaskBox from "./TaskBox";
 import { createNewTask } from "../../api/api";
 import Task from "./Task";
 import "./styles/UnstagedTasks.scss";
@@ -54,7 +54,7 @@ export default function UnstagedTasks(arrayOfTasks, setArrayOfTasks) {
         <input className="create-task-form__submit-btn" type="submit" />
       </form>
       {arrayOfTasks.data.map((task) => {
-        return task.is_staged ? "" : <TaskContainer obj={task} />;
+        return task.is_staged ? "" : <TaskBox obj={task} />;
       })}
     </div>
   );

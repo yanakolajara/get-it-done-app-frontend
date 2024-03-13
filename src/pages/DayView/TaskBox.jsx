@@ -1,8 +1,8 @@
-import "./styles/TaskContainer.scss";
+import "./styles/TaskBox.scss";
 import { deleteTaskWithTaskId, editTaskWithTaskId } from "../../api/api";
 import { useState } from "react";
 
-export default function TaskContainer(taskClass) {
+export default function TaskBox(taskClass) {
   const taskObj = taskClass.obj;
   const [toggleMenu, setToggleMenu] = useState("hide");
   const [editTaskContent, setEditTaskContent] = useState("");
@@ -33,24 +33,24 @@ export default function TaskContainer(taskClass) {
   };
 
   return (
-    <div className="taskContainer" id={taskObj.id}>
-      <p className="taskContainer__content">{taskObj.content}</p>
-      <div className="taskContainer__actions">
-        <button className="taskContainer__actions__btn">Stage</button>
+    <div className="taskBox" id={taskObj.id}>
+      <p className="taskBox__content">{taskObj.content}</p>
+      <div className="taskBox__actions">
+        <button className="taskBox__actions__btn">Stage</button>
         <button
-          className="taskContainer__actions__btn"
+          className="taskBox__actions__btn"
           onClick={() => setToggleMenu(toggleMenu === "hide" ? "show" : "hide")}
         >
           Edit
         </button>
         <button
-          className="taskContainer__actions__btn"
+          className="taskBox__actions__btn"
           onClick={(e) => deleteTask(e)}
         >
           Delete
         </button>
         <form
-          className={`taskContainer__edit-menu__${toggleMenu}`}
+          className={`taskBox__edit-menu__${toggleMenu}`}
           onSubmit={(e) => editTaskSubmit(e)}
         >
           <input

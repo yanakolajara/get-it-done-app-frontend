@@ -9,7 +9,7 @@
 
 .container {
   /* From https://css.glass */
-  background: rgba(255, 255, 255, 0.827);
+  background: rgba(255, 255, 255, 0.467);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(15.1px);
@@ -25,6 +25,7 @@
   border: 0;
   border-radius: 0.5rem;
   color: white;
+  font-size: 1.5em;
   box-shadow: 0px 0px 4px rgba($color: #000000, $alpha: 0.35),
     0px 0px 2px rgba($color: #000000, $alpha: 0.2) inset;
   &:hover {

@@ -36,9 +36,21 @@ const deleteTaskWithTaskId = async (task_id) => {
   }
 };
 
+//* --------- childTasks ----------- *//
+
+const getChildTaskFromTaskId = async (task_id) => {
+  try {
+    const tasksArr = await Axios.get(`/childTasks/${task_id}`);
+    return tasksArr;
+  } catch (error) {
+    return error;
+  }
+};
+
 export {
   getTasksFromUserID,
   createNewTask,
   editTaskWithTaskId,
   deleteTaskWithTaskId,
+  getChildTaskFromTaskId,
 };

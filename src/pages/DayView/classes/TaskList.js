@@ -1,6 +1,6 @@
 import Task from "./Task";
 
-class TaskList {
+export class TaskList {
   constructor() {
     this.top = null;
     this.size = 0;

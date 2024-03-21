@@ -6,10 +6,17 @@ import { getTasks } from "./helpers/Tasks";
 
 export default function DayView() {
   const [arrayOfTasks, setArrayOfTasks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
-    const tasksResponse = await getTasks();
-    setArrayOfTasks(tasksResponse.data);
+    try {
+      console.log("FETCHED!");
+      const tasksResponse = await getTasks();
+      setArrayOfTasks(!!tasksResponse.data ? tasksResponse.data : []);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("error");
+    }
   };
 
   useEffect(() => {
@@ -18,12 +25,12 @@ export default function DayView() {
 
   return (
     <div className="day_view">
-      {!arrayOfTasks[0] ? (
+      {isLoading ? (
         <p>Loading...</p>
       ) : (
         <>
           <Order props={{ arrayOfTasks, fetchData }} />
-          <List data={arrayOfTasks} fetch={fetchData} />
+          <List props={{ arrayOfTasks, fetchData }} />
         </>
       )}
     </div>

@@ -4,7 +4,7 @@ import DayView from "../DayView";
 import Home from "../Home";
 import WeekView from "../WeekView";
 import ListView from "../ListView";
-import Navbar from "../../navbar";
+// import Navbar from "../../navbar";
 import "./App.scss";
 
 export default function AppUI() {

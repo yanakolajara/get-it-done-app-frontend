@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { MdDragIndicator } from "react-icons/md";
 import { handleCreateNewTask } from "./helpers/Tasks";
 import "./styles/Order.scss";
-// import TaskContainer from "./TaskContainer";
+import OrderTask from "./OrderTask";
 
 export default function Order({ props }) {
   const { arrayOfTasks, fetchData } = props;
@@ -11,16 +10,7 @@ export default function Order({ props }) {
 
   const displayTasks = () => {
     return arrayOfTasks.map((task) => {
-      return (
-        <div className="order__tasks__task">
-          <MdDragIndicator className="order__tasks__task__hover" />
-          <p>{task.content}</p>
-          <div className="order__tasks__task__options">
-            <button>edit</button>
-            <button>delete</button>
-          </div>
-        </div>
-      );
+      return <OrderTask props={{ task, fetchData }} />;
     });
   };
 

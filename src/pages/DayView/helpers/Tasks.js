@@ -10,7 +10,7 @@ const getTasks = async () => {
     let backendData = await getTasksFromUserID(1);
     return backendData;
   } catch (error) {
-    console.error(error);
+    console.error({ message: error });
   }
 };
 
@@ -22,15 +22,12 @@ const handleCreateNewTask = async (newTaskContent) => {
     }-${date.getDate()}`;
 
     const newTask = await createNewTask(1, {
-      details_id: null,
       content: newTaskContent,
-      progress_state: "1",
       date: currDate,
     });
-    console.log(newTask);
     return newTask;
   } catch (error) {
-    console.error(error);
+    console.error({ message: error });
   }
 };
 
@@ -40,12 +37,10 @@ const handleEditTask = async (task_id, data) => {
       content: data.content,
       progress_state: data.progress_state,
       date: data.date,
-      previews_task_id: data.previews_task_id,
-      next_task_id: data.next_task_id,
     });
     return editedData;
   } catch (error) {
-    console.error(error);
+    console.error({ message: error });
   }
 };
 
@@ -54,7 +49,7 @@ const handleDeleteTask = async (task_id) => {
     const deletedTask = await deleteTaskWithTaskId(task_id);
     return deletedTask;
   } catch (error) {
-    console.error(error);
+    console.error({ message: error });
   }
 };
 

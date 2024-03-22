@@ -55,6 +55,17 @@ const createChildTask = async (task_id, body) => {
     return error;
   }
 };
+const changeCompletionStatus = async (task_id, body) => {
+  try {
+    const response = await Axios.put(
+      `/childTasks/completionStatus/${task_id}`,
+      body
+    );
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
 
 const deleteChildTask = async (task_id) => {
   try {
@@ -71,4 +82,5 @@ export {
   getChildTaskFromTaskId,
   createChildTask,
   deleteChildTask,
+  changeCompletionStatus,
 };

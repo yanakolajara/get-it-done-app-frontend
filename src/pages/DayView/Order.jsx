@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { IoMdAddCircle } from "react-icons/io";
 import { handleCreateNewTask } from "./helpers/Tasks";
-import "./styles/Order.scss";
 import OrderTask from "./OrderTask";
+import "./styles/Order.scss";
 
 export default function Order({ props }) {
   const { arrayOfTasks, fetchData } = props;
   const [newTaskContent, setNewTaskContent] = useState("");
-  const [hideCreateTaskForm, setHideCreateTaskForm] = useState("hide");
+  const [hideCreateTaskForm, setHideCreateTaskForm] = useState("hide-form");
 
   const displayTasks = () => {
     return arrayOfTasks.map((task) => {
@@ -15,34 +16,38 @@ export default function Order({ props }) {
   };
 
   return (
-    <div className="container unstaged-tasks">
+    <div className="container-glass orderTaskContainer">
       <h1>Task order</h1>
       <button
         className="btn-create"
         onClick={() =>
-          setHideCreateTaskForm(hideCreateTaskForm === "hide" ? "show" : "hide")
+          setHideCreateTaskForm(
+            hideCreateTaskForm === "hide-form" ? "show-form" : "hide-form"
+          )
         }
       >
         Create Task
       </button>
       <form
-        className={`create-task-form-${hideCreateTaskForm}`}
+        className={`create-task-form ${hideCreateTaskForm}`}
         onSubmit={async (e) => {
           e.preventDefault();
           await handleCreateNewTask(newTaskContent);
+          setHideCreateTaskForm("hide-form");
           fetchData();
         }}
       >
-        <label htmlFor="content">Content</label>
         <input
           className="create-task-form__content"
           type="text"
           value={newTaskContent}
           onChange={(e) => setNewTaskContent(e.target.value)}
         />
-        <input className="create-task-form__submit-btn" type="submit" />
+        <button className="create-task-form__submit-btn" type="submit">
+          <IoMdAddCircle className="create-task-form__submit-btn__icon" />
+        </button>
       </form>
-      <div className="order__tasks">{displayTasks()}</div>
+      {displayTasks()}
     </div>
   );
 }

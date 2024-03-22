@@ -1,4 +1,6 @@
 .childTask {
+  &- {
+  }
   display: flex;
   justify-content: space-between;
   margin-bottom: 12px;
@@ -13,4 +15,8 @@
       border: 0;
     }
   }
+}
+
+.completed {
+  background-color: rgb(24, 233, 24);
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "./styles/TaskContainer.scss";
 import { createChildTask, getChildTaskFromTaskId } from "../../api/api";
 import ChildTask from "./ChildTask";
+import "./styles/ListTask.scss";
 
 export default function ListTask({ props }) {
   const { taskObj, fetchData } = props;
@@ -51,7 +51,7 @@ export default function ListTask({ props }) {
       >
         <input
           type="text"
-          className="create-child-task-form__conent"
+          className="create-child-task-form__contsent"
           value={newTaskContent}
           onChange={(e) => setNewTaskContent(e.target.value)}
         />

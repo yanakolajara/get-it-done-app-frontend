@@ -5,6 +5,17 @@
   height: 100%;
   width: 30%;
   border-radius: 1rem;
-  background: rgba(107, 107, 107, 0.227);
+  background: rgba(0, 0, 0, 0.2);
+
   box-shadow: 0 0px 8px rgba(0, 0, 0, 0.1) inset;
+}
+
+.create-child-task-form {
+  display: flex;
+  &__content {
+    background: rgba(0, 0, 0, 0.2);
+
+    border: none;
+    border-radius: 0.5rem;
+  }
 }

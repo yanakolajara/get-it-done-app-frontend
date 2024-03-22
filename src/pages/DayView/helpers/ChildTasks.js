@@ -1,9 +1,21 @@
-import { deleteChildTask } from "../../../api/api";
+import { deleteChildTask, changeCompletionStatus } from "../../../api/api";
 
 const handleCreateNewChildTask = async (e) => {
   e.preventDefault();
   try {
     // const response = await;
+  } catch (error) {
+    console.error({ message: error });
+  }
+};
+
+const handleChangeCompletionStatus = async (task_id, completionStatus) => {
+  try {
+    const editedTask = await changeCompletionStatus(task_id, {
+      isCompleted: completionStatus,
+    });
+    console.log(editedTask);
+    return editedTask;
   } catch (error) {
     console.error({ message: error });
   }
@@ -18,4 +30,8 @@ const handleDeleteChildTask = async (task_id) => {
   }
 };
 
-export { handleCreateNewChildTask, handleDeleteChildTask };
+export {
+  handleCreateNewChildTask,
+  handleDeleteChildTask,
+  handleChangeCompletionStatus,
+};

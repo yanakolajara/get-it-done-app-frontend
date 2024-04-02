@@ -4,7 +4,7 @@ import ChildTask from "./ChildTask";
 import "./styles/ListTask.scss";
 
 export default function ListTask({ props }) {
-  const { taskObj, fetchData } = props;
+  const { taskObj } = props;
   const [childTasks, setChildTasks] = useState([]);
   const [newTaskContent, setNewTaskContent] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -19,9 +19,7 @@ export default function ListTask({ props }) {
 
   const displayChildTasks = () => {
     if (childTasks.length > 0) {
-      return childTasks.map((childTask) => (
-        <ChildTask props={{ childTask, fetchData }} />
-      ));
+      return childTasks.map((childTask) => <ChildTask props={{ childTask }} />);
     } else {
       return <></>;
     }

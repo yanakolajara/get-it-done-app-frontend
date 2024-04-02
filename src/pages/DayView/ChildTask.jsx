@@ -7,7 +7,7 @@ import "./styles/ChildTasks.scss";
 import { changeCompletionStatus, deleteChildTask } from "../../api/api";
 
 export default function ({ props }) {
-  const { childTask, fetchData } = props;
+  const { childTask } = props;
   const {
     completed,
     content,

@@ -3,36 +3,59 @@ import Order from "./Order";
 import List from "./List";
 import "./styles/index.scss";
 import { getTasks } from "./helpers/Tasks";
+import useTask from "./hooks/useTask";
+import Loader from "../../components/Loader";
+import ListTask from "./ListTask";
 
 export default function DayView() {
-  const [arrayOfTasks, setArrayOfTasks] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const {
+    listOfTasks,
+    setListOfTasks,
+    isLoading,
+    handleCreateTask,
+    handleDeleteTasks,
+    handleEditTask,
+    handleGetTasks,
+  } = useTask();
+  // const [arrayOfTasks, setArrayOfTasks] = useState([]);
+  // const [serverError, setServerError] = useState(false);
 
-  const fetchData = async () => {
-    try {
-      console.log("FETCHED!");
-      const tasksResponse = await getTasks();
-      setArrayOfTasks(!!tasksResponse.data ? tasksResponse.data : []);
-      setIsLoading(false);
-    } catch (error) {
-      console.error("error");
-    }
-  };
+  // TODO: start using useTask custom hook to manipulate data
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // const fetchData = async () => {
+  //   try {
+  //     const tasksResponse = await getTasks();
+  //     setArrayOfTasks(!!tasksResponse.data ? tasksResponse.data : []);
+  //     setIsLoading(false);
+  //   } catch (error) {
+  //     console.error("error");
+  //   }
+  // };
 
   return (
     <div className="day_view">
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          <Order props={{ arrayOfTasks, fetchData }} />
-          <List props={{ arrayOfTasks, fetchData }} />
-        </>
-      )}
+      <Order
+        props={
+          {
+            // arrayOfTasks,
+            // fetchData
+          }
+        }
+      >
+        {isLoading && <Loader />}
+        {!isLoading && console.log("isLoading is false")}
+        {listOfTasks.map((taskObj) => (
+          <ListTask props={{ taskObj }} />
+        ))}
+      </Order>
+      <List
+        props={
+          {
+            //  arrayOfTasks,
+            // fetchData
+          }
+        }
+      />
     </div>
   );
 }

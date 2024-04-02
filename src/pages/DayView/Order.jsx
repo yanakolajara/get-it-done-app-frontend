@@ -4,20 +4,20 @@ import { handleCreateNewTask } from "./helpers/Tasks";
 import OrderTask from "./OrderTask";
 import "./styles/Order.scss";
 
-export default function Order({ props }) {
-  const { arrayOfTasks, fetchData } = props;
-  const [newTaskContent, setNewTaskContent] = useState("");
-  const [hideCreateTaskForm, setHideCreateTaskForm] = useState("hide-form");
+export default function Order({ children }) {
+  // const { arrayOfTasks, fetchData } = props;
+  // const [newTaskContent, setNewTaskContent] = useState("");
+  // const [hideCreateTaskForm, setHideCreateTaskForm] = useState("hide-form");
 
-  const displayTasks = () => {
-    return arrayOfTasks.map((task) => {
-      return <OrderTask props={{ task, fetchData }} />;
-    });
-  };
+  // const displayTasks = () => {
+  //   return arrayOfTasks.map((task) => {
+  //     return <OrderTask props={{ task, fetchData }} />;
+  //   });
+  // };
 
   return (
     <div className="container-glass orderTaskContainer">
-      <h1>Task order</h1>
+      {/* <h1>Task order</h1>
       <button
         className="btn-create"
         onClick={() =>
@@ -47,7 +47,8 @@ export default function Order({ props }) {
           <IoMdAddCircle className="create-task-form__submit-btn__icon" />
         </button>
       </form>
-      {displayTasks()}
+      {displayTasks()} */}
+      {children}
     </div>
   );
 }

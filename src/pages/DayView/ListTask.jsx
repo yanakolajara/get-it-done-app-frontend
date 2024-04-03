@@ -3,15 +3,14 @@ import { createChildTask, getChildTaskFromTaskId } from "../../api/api";
 import ChildTask from "./ChildTask";
 import "./styles/ListTask.scss";
 
-export default function ListTask({ props }) {
-  const { taskObj } = props;
+export default function ListTask(props) {
   const [childTasks, setChildTasks] = useState([]);
   const [newTaskContent, setNewTaskContent] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   const getChildren = async () => {
     try {
-      const response = await getChildTaskFromTaskId(taskObj.id);
+      const response = await getChildTaskFromTaskId(props.id);
       setChildTasks(response);
       setIsLoading(false);
     } catch (error) {}
@@ -19,7 +18,7 @@ export default function ListTask({ props }) {
 
   const displayChildTasks = () => {
     if (childTasks.length > 0) {
-      return childTasks.map((childTask) => <ChildTask props={{ childTask }} />);
+      return childTasks.map((childTask) => <ChildTask props={childTask} />);
     } else {
       return <></>;
     }
@@ -35,13 +34,13 @@ export default function ListTask({ props }) {
 
   return (
     <div className="taskContainer">
-      <h2>{taskObj.content}</h2>
+      <h2>{props.content}</h2>
       {displayChildTasks()}
       <form
         className="create-child-task-form"
         onSubmit={async (e) => {
           e.preventDefault();
-          await createChildTask(taskObj.id, {
+          await createChildTask(props.id, {
             content: newTaskContent,
           });
           getChildren();

@@ -49,14 +49,19 @@ export default function DayView() {
         ))}
       </Order>
 
-      <List
-        props={
-          {
-            //  arrayOfTasks,
-            // fetchData
-          }
-        }
-      />
+      <List>
+        {listOfTasks.map((taskObj) => (
+          <ListTask
+            id={taskObj.id}
+            user_id={taskObj.user_id}
+            content={taskObj.content}
+            progress_state={taskObj.progress_state}
+            date={taskObj.date}
+            previews_task_id={taskObj.previews_task_id}
+            next_task_id={taskObj.next_task_id}
+          />
+        ))}
+      </List>
     </div>
   );
 }

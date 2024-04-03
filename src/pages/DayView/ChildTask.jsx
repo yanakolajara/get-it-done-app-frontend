@@ -3,21 +3,11 @@ import React, { useEffect, useState } from "react";
 //   handleDeleteChildTask,
 //   handleChangeCompletionStatus,
 // } from "./helpers/ChildTasks";
-// import "./styles/ChildTasks.scss";
+import "./styles/ChildTasks.scss";
+import { handleDeleteTask } from "./helpers/Tasks";
 // import { changeCompletionStatus, deleteChildTask } from "../../api/api";
 
-export default function (props) {
-  console.log("props: ", props);
-  // const { childTask } = props;
-  // const {
-  //   completed,
-  //   content,
-  //   emotional_energy,
-  //   id,
-  //   parenttask_id,
-  //   physical_energy,
-  //   position,
-  // } = childTask;
+export default function ({ props }) {
   // const [isLoading, setIsLoading] = useState(false);
 
   // function manualRender() {
@@ -29,32 +19,32 @@ export default function (props) {
   // }
 
   // if (isLoading) return <p>Loading...</p>;
-  return <p>hi</p>;
-  // return (
-  //   <div className={`childTask ${completed && "completed"}`}>
-  //     <p className="childTask__content">{content}</p>
-  //     <div className="childTask__options">
-  //       <button
-  //         onClick={async (e) => {
-  //           e.preventDefault();
-  //           await deleteChildTask(id);
-  //           manualRender();
-  //         }}
-  //       >
-  //         🗑️
-  //       </button>
-  //       <button
-  //         onClick={async (e) => {
-  //           e.preventDefault();
-  //           await changeCompletionStatus(id, {
-  //             isCompleted: !completed,
-  //           });
-  //           manualRender();
-  //         }}
-  //       >
-  //         ✅
-  //       </button>
-  //     </div>
-  //   </div>
-  // );
+  return (
+    <div className={`childTask`}>
+      <p className="childTask__content">{props.content}</p>
+      <div className="childTask__options">
+        <button
+          onClick={async (e) => {
+            e.preventDefault();
+            await handleDeleteTask(props.id);
+            //FIXME: manualRender();
+          }}
+        >
+          🗑️
+        </button>
+        <button
+        // FIXME" create a change completion status function on the custom hook
+        // onClick={async (e) => {
+        //   e.preventDefault();
+        //   await changeCompletionStatus(id, {
+        //     isCompleted: !completed,
+        //   });
+        //   manualRender();
+        // }}
+        >
+          ✅
+        </button>
+      </div>
+    </div>
+  );
 }

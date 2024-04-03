@@ -13,6 +13,7 @@ function useTask() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    console.log(isLoading);
     handleGetTasks();
     console.log("rendered from useTask hook");
   }, []);

@@ -1,12 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
 import { handleCreateNewTask } from "./helpers/Tasks";
 import OrderTask from "./OrderTask";
 import "./styles/Order.scss";
+import OrderForm from "./OrderForm";
 
-export default function Order({ children }) {
+export default function Order(props) {
   // const { arrayOfTasks, fetchData } = props;
-  // const [newTaskContent, setNewTaskContent] = useState("");
+  const [showForm, setShowForm] = useState(false);
   // const [hideCreateTaskForm, setHideCreateTaskForm] = useState("hide-form");
 
   // const displayTasks = () => {
@@ -17,38 +18,17 @@ export default function Order({ children }) {
 
   return (
     <div className="container-glass orderTaskContainer">
-      {/* <h1>Task order</h1>
-      <button
-        className="btn-create"
-        onClick={() =>
-          setHideCreateTaskForm(
-            hideCreateTaskForm === "hide-form" ? "show-form" : "hide-form"
-          )
-        }
-      >
-        Create Task
-      </button>
-      <form
-        className={`create-task-form ${hideCreateTaskForm}`}
-        onSubmit={async (e) => {
-          e.preventDefault();
-          await handleCreateNewTask(newTaskContent);
-          setHideCreateTaskForm("hide-form");
-          fetchData();
-        }}
-      >
-        <input
-          className="create-task-form__content"
-          type="text"
-          value={newTaskContent}
-          onChange={(e) => setNewTaskContent(e.target.value)}
-        />
-        <button className="create-task-form__submit-btn" type="submit">
-          <IoMdAddCircle className="create-task-form__submit-btn__icon" />
-        </button>
-      </form>
-      {displayTasks()} */}
-      {children}
+      {props.isLoading && props.onLoading()}
+      {!props.isLoading && (
+        <React.Fragment>
+          <h1>Task order</h1>
+          <button className="btn-create" onClick={() => setShowForm(!showForm)}>
+            Create
+          </button>
+          {showForm && props.onEdit()}
+          {props.children}
+        </React.Fragment>
+      )}
     </div>
   );
 }

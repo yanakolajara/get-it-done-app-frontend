@@ -6,6 +6,10 @@ import { getTasks } from "./helpers/Tasks";
 import useTask from "./hooks/useTask";
 import Loader from "../../components/Loader";
 import ListTask from "./ListTask";
+import "./styles/List.scss";
+import OrderTask from "./OrderTask";
+import OrderForm from "./OrderForm";
+import OrderTaskForm from "./OrderTaskForm";
 
 export default function DayView() {
   const {
@@ -17,37 +21,34 @@ export default function DayView() {
     handleEditTask,
     handleGetTasks,
   } = useTask();
-  // const [arrayOfTasks, setArrayOfTasks] = useState([]);
-  // const [serverError, setServerError] = useState(false);
-
-  // TODO: start using useTask custom hook to manipulate data
-
-  // const fetchData = async () => {
-  //   try {
-  //     const tasksResponse = await getTasks();
-  //     setArrayOfTasks(!!tasksResponse.data ? tasksResponse.data : []);
-  //     setIsLoading(false);
-  //   } catch (error) {
-  //     console.error("error");
-  //   }
-  // };
 
   return (
     <div className="day_view">
       <Order
-        props={
-          {
-            // arrayOfTasks,
-            // fetchData
-          }
-        }
+        isLoading={isLoading}
+        onLoading={() => <Loader />}
+        onEdit={() => <OrderForm />}
       >
-        {isLoading && <Loader />}
-        {!isLoading && console.log("isLoading is false")}
         {listOfTasks.map((taskObj) => (
-          <ListTask props={{ taskObj }} />
+          <OrderTask
+            id={taskObj.id}
+            user_id={taskObj.user_id}
+            content={taskObj.content}
+            progress_state={taskObj.progress_state}
+            date={taskObj.date}
+            previews_task_id={taskObj.previews_task_id}
+            next_task_id={taskObj.next_task_id}
+            onEdit={() => (
+              <OrderTaskForm
+                content={taskObj.content}
+                user_id={taskObj.user_id}
+                onEdit={() => <OrderTaskForm />}
+              />
+            )}
+          />
         ))}
       </Order>
+
       <List
         props={
           {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   createNewTask,
   deleteTaskWithTaskId,
@@ -13,17 +13,16 @@ function useTask() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log(isLoading);
-    handleGetTasks();
     console.log("rendered from useTask hook");
-  }, []);
+    isLoading && handleGetTasks().then(console.log("Fetched executed"));
+  }, [isLoading]);
 
   const handleCreateTask = async (body) => {
     try {
-      const response = await createNewTask(userId, body);
-      setListOfTasks(listOfTasks, ...response);
+      await createNewTask(userId, body);
+      setIsLoading(true);
     } catch (error) {
-      return error.data;
+      console.error({ error: error.message });
     }
   };
 
@@ -33,25 +32,25 @@ function useTask() {
       setListOfTasks(response.data);
       setIsLoading(false);
     } catch (error) {
-      return error.data;
+      console.error({ error: error.message });
     }
   };
 
   const handleEditTask = async (task_id, body) => {
     try {
-      const response = await editTaskWithTaskId(task_id, body);
-      setListOfTasks(listOfTasks, ...response);
+      await editTaskWithTaskId(task_id, body);
+      setIsLoading(true);
     } catch (error) {
-      return error.data;
+      console.error({ error: error.message });
     }
   };
 
-  const handleDeleteTasks = async (task_id) => {
+  const handleDeleteTask = async (task_id) => {
     try {
-      const response = deleteTaskWithTaskId(task_id);
-      setListOfTasks(listOfTasks, ...response);
+      await deleteTaskWithTaskId(task_id);
+      setIsLoading(true);
     } catch (error) {
-      return error.data;
+      console.error({ error: error.message });
     }
   };
 
@@ -60,7 +59,7 @@ function useTask() {
     setListOfTasks,
     isLoading,
     handleCreateTask,
-    handleDeleteTasks,
+    handleDeleteTask,
     handleEditTask,
     handleGetTasks,
   };

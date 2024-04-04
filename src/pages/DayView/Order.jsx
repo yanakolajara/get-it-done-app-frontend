@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
-import { handleCreateNewTask } from "./helpers/Tasks";
-import OrderTask from "./OrderTask";
 import "./styles/Order.scss";
 import OrderForm from "./OrderForm";
 
 export default function Order(props) {
+  const renderFunc = props.children || props.render;
   // const { arrayOfTasks, fetchData } = props;
   const [showForm, setShowForm] = useState(false);
   // const [hideCreateTaskForm, setHideCreateTaskForm] = useState("hide-form");
@@ -15,6 +14,9 @@ export default function Order(props) {
   //     return <OrderTask props={{ task, fetchData }} />;
   //   });
   // };
+  useEffect(() => {
+    props.isLoading && setShowForm(false);
+  }, [props.isLoading]);
 
   return (
     <div className="container-glass orderTaskContainer">
@@ -25,8 +27,8 @@ export default function Order(props) {
           <button className="btn-create" onClick={() => setShowForm(!showForm)}>
             Create
           </button>
-          {showForm && props.onEdit()}
-          {props.children}
+          {showForm && props.showForm()}
+          {props.listOfTasks.map(renderFunc)}
         </React.Fragment>
       )}
     </div>

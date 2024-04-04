@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Order from "./Order";
 import List from "./List";
 import "./styles/index.scss";
-import { getTasks } from "./helpers/Tasks";
 import useTask from "./hooks/useTask";
 import Loader from "../../components/Loader";
 import ListTask from "./ListTask";
@@ -17,7 +16,7 @@ export default function DayView() {
     setListOfTasks,
     isLoading,
     handleCreateTask,
-    handleDeleteTasks,
+    handleDeleteTask,
     handleEditTask,
     handleGetTasks,
   } = useTask();
@@ -25,42 +24,32 @@ export default function DayView() {
   return (
     <div className="day_view">
       <Order
+        listOfTasks={listOfTasks}
         isLoading={isLoading}
         onLoading={() => <Loader />}
-        onEdit={() => <OrderForm />}
+        showForm={() => (
+          <OrderForm onCreate={(body) => handleCreateTask(body)} />
+        )}
       >
-        {listOfTasks.map((taskObj) => (
+        {(taskObj) => (
           <OrderTask
-            id={taskObj.id}
-            user_id={taskObj.user_id}
-            content={taskObj.content}
-            progress_state={taskObj.progress_state}
-            date={taskObj.date}
-            previews_task_id={taskObj.previews_task_id}
-            next_task_id={taskObj.next_task_id}
-            onEdit={() => (
-              <OrderTaskForm
-                content={taskObj.content}
-                user_id={taskObj.user_id}
-                onEdit={() => <OrderTaskForm />}
-              />
-            )}
-          />
-        ))}
+            taskObj={taskObj}
+            onDelete={(task_id) => handleDeleteTask(task_id)}
+          >
+            <OrderTaskForm
+              content={taskObj.content}
+              id={taskObj.id}
+              onEdit={(id, body) => handleEditTask(id, body)}
+            />
+          </OrderTask>
+        )}
       </Order>
-
-      <List>
-        {listOfTasks.map((taskObj) => (
-          <ListTask
-            id={taskObj.id}
-            user_id={taskObj.user_id}
-            content={taskObj.content}
-            progress_state={taskObj.progress_state}
-            date={taskObj.date}
-            previews_task_id={taskObj.previews_task_id}
-            next_task_id={taskObj.next_task_id}
-          />
-        ))}
+      <List
+        listOfTasks={listOfTasks}
+        isLoading={isLoading}
+        onLoading={() => <Loader />}
+      >
+        {(taskObj) => <ListTask />}
       </List>
     </div>
   );

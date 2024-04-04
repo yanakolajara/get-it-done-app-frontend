@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { handleCreateNewTask } from "./helpers/Tasks";
 import { IoMdAddCircle } from "react-icons/io";
 
-export default function OrderForm() {
+export default function OrderForm(props) {
   const [newTaskContent, setNewTaskContent] = useState();
   return (
     <form
       className="create-task-form"
       onSubmit={async (e) => {
         e.preventDefault();
-        await handleCreateNewTask(newTaskContent);
+        await props.onCreate({ content: newTaskContent });
       }}
     >
       <input

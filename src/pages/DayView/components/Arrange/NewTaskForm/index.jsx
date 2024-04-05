@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
 
-export default function OrderForm(props) {
+export default function NewTaskForm(props) {
   const [newTaskContent, setNewTaskContent] = useState();
   return (
     <form

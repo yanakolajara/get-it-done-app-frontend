@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { MdDragIndicator } from "react-icons/md";
-import { deleteTaskWithTaskId } from "../../api/api";
 import { TiEdit } from "react-icons/ti";
 import { RiDeleteBin5Fill } from "react-icons/ri";
-import "./styles/OrderTask.scss";
+import "./index.scss";
 
-export default function OrderTask(props) {
+export default function Task(props) {
   const [showForm, setShowForm] = useState(false);
 
   return (

@@ -1,55 +1,83 @@
 import React, { useEffect, useState } from "react";
-import Order from "./Order";
-import List from "./List";
-import "./styles/index.scss";
 import useTask from "./hooks/useTask";
 import Loader from "../../components/Loader";
-import ListTask from "./ListTask";
-import "./styles/List.scss";
-import OrderTask from "./OrderTask";
-import OrderForm from "./OrderForm";
-import OrderTaskForm from "./OrderTaskForm";
+import Arrange from "./components/Arrange";
+import Task from "./components/Arrange/Task";
+import EditTaskForm from "./components/Arrange/EditTaskForm";
+import NewTaskForm from "./components/Arrange/NewTaskForm";
+import List from "./components/Lists";
+import ListTask from "./components/Lists/TaskContainer";
+import Step from "./components/Lists/Step";
+import EditStepForm from "./components/Lists/EditStepForm";
+import NewStepForm from "./components/Lists/NewStepForm";
+import "./index.scss";
 
 export default function DayView() {
   const {
     listOfTasks,
-    setListOfTasks,
     isLoading,
     handleCreateTask,
     handleDeleteTask,
     handleEditTask,
-    handleGetTasks,
+    handleAddStep,
+    handleDeleteStep,
+    handleCompleteStep,
   } = useTask();
 
   return (
     <div className="day_view">
-      <Order
+      <Arrange
         listOfTasks={listOfTasks}
         isLoading={isLoading}
         onLoading={() => <Loader />}
         showForm={() => (
-          <OrderForm onCreate={(body) => handleCreateTask(body)} />
+          <NewTaskForm onCreate={(body) => handleCreateTask(body)} />
         )}
       >
         {(taskObj) => (
-          <OrderTask
+          <Task
             taskObj={taskObj}
             onDelete={(task_id) => handleDeleteTask(task_id)}
           >
-            <OrderTaskForm
+            <EditTaskForm
               content={taskObj.content}
               id={taskObj.id}
               onEdit={(id, body) => handleEditTask(id, body)}
             />
-          </OrderTask>
+          </Task>
         )}
-      </Order>
+      </Arrange>
+
       <List
         listOfTasks={listOfTasks}
         isLoading={isLoading}
         onLoading={() => <Loader />}
       >
-        {(taskObj) => <ListTask />}
+        {(taskObj) => (
+          <ListTask
+            taskObj={taskObj}
+            isLoading={isLoading}
+            onLoading={() => <Loader />}
+          >
+            <React.Fragment>
+              <NewStepForm
+                task_id={taskObj.id}
+                handleAddStep={(task_id, body) => handleAddStep(task_id, body)}
+              />
+              {taskObj.childTasks.map((stepObj) => (
+                <Step
+                  stepObj={stepObj}
+                  onDelete={(step_id) => handleDeleteStep(step_id)}
+                  onComplete={(step_id, body) =>
+                    handleCompleteStep(step_id, body)
+                  }
+                >
+                  {/* <EditStepForm /> */}
+                </Step>
+              ))}
+            </React.Fragment>
+          </ListTask>
+        )}
       </List>
     </div>
   );

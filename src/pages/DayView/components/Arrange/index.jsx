@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { IoMdAddCircle } from "react-icons/io";
-import "./styles/Order.scss";
-import OrderForm from "./OrderForm";
+import "./index.scss";
 
-export default function Order(props) {
+export default function Arrange(props) {
   const renderFunc = props.children || props.render;
-  // const { arrayOfTasks, fetchData } = props;
   const [showForm, setShowForm] = useState(false);
-  // const [hideCreateTaskForm, setHideCreateTaskForm] = useState("hide-form");
 
-  // const displayTasks = () => {
-  //   return arrayOfTasks.map((task) => {
-  //     return <OrderTask props={{ task, fetchData }} />;
-  //   });
-  // };
   useEffect(() => {
     props.isLoading && setShowForm(false);
   }, [props.isLoading]);

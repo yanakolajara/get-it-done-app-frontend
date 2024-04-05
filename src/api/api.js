@@ -5,7 +5,7 @@ const getTasksFromUserID = async (user_id) => {
     const response = await Axios.get(`/tasks/${user_id}`);
     return response;
   } catch (error) {
-    return error;
+    return error.response;
   }
 };
 
@@ -14,7 +14,7 @@ const createNewTask = async (user_id, body) => {
     const response = await Axios.post(`/tasks/${user_id}`, body);
     return response;
   } catch (error) {
-    return error;
+    return error.response;
   }
 };
 
@@ -23,7 +23,7 @@ const editTaskWithTaskId = async (task_id, body) => {
     const response = await Axios.put(`/tasks/${task_id}`, body);
     return response;
   } catch (error) {
-    return error;
+    return error.response;
   }
 };
 
@@ -32,7 +32,7 @@ const deleteTaskWithTaskId = async (task_id) => {
     const response = await Axios.delete(`/tasks/${task_id}`);
     return response;
   } catch (error) {
-    return error;
+    return error.response;
   }
 };
 
@@ -41,8 +41,9 @@ const deleteTaskWithTaskId = async (task_id) => {
 const getChildTaskFromTaskId = async (task_id) => {
   try {
     const response = await Axios.get(`/childTasks/${task_id}`);
-    return response.data;
+    return response;
   } catch (error) {
+    console.log("here is the problem");
     return error;
   }
 };
@@ -55,6 +56,7 @@ const createChildTask = async (task_id, body) => {
     return error;
   }
 };
+
 const changeCompletionStatus = async (task_id, body) => {
   try {
     const response = await Axios.put(
@@ -70,8 +72,12 @@ const changeCompletionStatus = async (task_id, body) => {
 const deleteChildTask = async (task_id) => {
   try {
     const response = await Axios.delete(`childTasks/${task_id}`);
+    console.log("deleteChildTask.response: ", response);
     return response;
-  } catch (error) {}
+  } catch (error) {
+    console.log("deleteChildTask.error: ", error);
+    return error;
+  }
 };
 
 export {

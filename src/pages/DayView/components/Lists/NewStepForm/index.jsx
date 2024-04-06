@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./index.scss";
 
 export default function NewStepForm(props) {
   const [newTaskContent, setNewTaskContent] = useState("");
@@ -14,7 +15,7 @@ export default function NewStepForm(props) {
     >
       <input
         type="text"
-        className="create-child-task-form__contsent"
+        className="create-child-task-form__content"
         value={newTaskContent}
         onChange={(e) => setNewTaskContent(e.target.value)}
       />
@@ -23,7 +24,7 @@ export default function NewStepForm(props) {
       <input
         type="submit"
         className="create-child-task-form__submit"
-        value="Add step"
+        value="New Step"
       />
     </form>
   );

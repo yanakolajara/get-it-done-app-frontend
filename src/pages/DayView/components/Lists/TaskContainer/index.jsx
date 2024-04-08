@@ -3,10 +3,15 @@ import "./index.scss";
 export default function TaskContainer(props) {
   const renderFunc = props.children || props.render;
   return (
-    <div className="taskContainer">
-      <h2>{props.taskObj.content}</h2>
+    <section className="taskContainer">
+      <header className="taskContainer__header">
+        <p className="taskContainer__header__title">{props.taskObj.content}</p>
+        {props.newStepForm()}
+      </header>
       {renderFunc}
-      <p>1/4</p>
-    </div>
+      <footer>
+        <p>0/{renderFunc.length}</p>
+      </footer>
+    </section>
   );
 }

@@ -58,24 +58,24 @@ export default function DayView() {
             taskObj={taskObj}
             isLoading={isLoading}
             onLoading={() => <Loader />}
-          >
-            <React.Fragment>
+            newStepForm={() => (
               <NewStepForm
                 task_id={taskObj.id}
                 handleAddStep={(task_id, body) => handleAddStep(task_id, body)}
               />
-              {taskObj.childTasks.map((stepObj) => (
-                <Step
-                  stepObj={stepObj}
-                  onDelete={(step_id) => handleDeleteStep(step_id)}
-                  onComplete={(step_id, body) =>
-                    handleCompleteStep(step_id, body)
-                  }
-                >
-                  {/* <EditStepForm /> */}
-                </Step>
-              ))}
-            </React.Fragment>
+            )}
+          >
+            {taskObj.childTasks.map((stepObj) => (
+              <Step
+                stepObj={stepObj}
+                onDelete={(step_id) => handleDeleteStep(step_id)}
+                onComplete={(step_id, body) =>
+                  handleCompleteStep(step_id, body)
+                }
+              >
+                {/* <EditStepForm /> */}
+              </Step>
+            ))}
           </ListTask>
         )}
       </List>

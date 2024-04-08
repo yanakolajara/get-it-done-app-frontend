@@ -24,7 +24,7 @@ export default function NewStepForm(props) {
       <input
         type="submit"
         className="create-child-task-form__submit"
-        value="New Step"
+        value="Add Step"
       />
     </form>
   );

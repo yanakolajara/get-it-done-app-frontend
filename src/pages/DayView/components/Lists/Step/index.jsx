@@ -2,7 +2,7 @@ import "./index.scss";
 
 export default function Step(props) {
   return (
-    <div className={`childTask`}>
+    <article className="childTask">
       <p className="childTask__content">{props.stepObj.content}</p>
       <div className="childTask__options">
         <button
@@ -24,6 +24,6 @@ export default function Step(props) {
           ✅
         </button>
       </div>
-    </div>
+    </article>
   );
 }

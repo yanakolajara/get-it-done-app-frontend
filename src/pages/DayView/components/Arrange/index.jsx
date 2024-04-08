@@ -11,16 +11,14 @@ export default function Arrange(props) {
 
   return (
     <div className="container-glass orderTaskContainer">
+      <h1>Task order</h1>
+      <button className="btn-create" onClick={() => setShowForm(!showForm)}>
+        Create
+      </button>
+      {props.showForm()}
       {props.isLoading && props.onLoading()}
       {!props.isLoading && (
-        <React.Fragment>
-          <h1>Task order</h1>
-          <button className="btn-create" onClick={() => setShowForm(!showForm)}>
-            Create
-          </button>
-          {showForm && props.showForm()}
-          {props.listOfTasks.map(renderFunc)}
-        </React.Fragment>
+        <React.Fragment>{props.listOfTasks.map(renderFunc)}</React.Fragment>
       )}
     </div>
   );

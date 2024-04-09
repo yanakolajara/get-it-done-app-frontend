@@ -61,8 +61,6 @@ function useTask() {
           return tasksWithchildTasks;
         })
         .then((response) => {
-          console.log("ORIGINAL: ", response);
-          console.log("MODIFIED: ", sortTaskList(response));
           return sortTaskList(response);
         })
         .then((response) => setListOfTasks(response));

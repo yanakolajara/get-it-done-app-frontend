@@ -11,7 +11,6 @@ const sortTaskList = async (taskList) => {
     curr = taskList.find((task) => task.id === curr.next_task_id) || null;
     sorted.push(curr);
   }
-  console.log("I'm testing here: ", sorted);
   return sorted;
 };
 

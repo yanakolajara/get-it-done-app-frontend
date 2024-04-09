@@ -18,6 +18,7 @@ function useTask() {
   const [listOfTasks, setListOfTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [processing, setProcessing] = useState(false);
+  const [onStart, setOnStart] = useState(false);
 
   useEffect(() => {
     !processing &&
@@ -128,6 +129,8 @@ function useTask() {
   return {
     listOfTasks,
     isLoading,
+    onStart,
+    setOnStart,
     setListOfTasks,
     handleCreateTask,
     handleDeleteTask,

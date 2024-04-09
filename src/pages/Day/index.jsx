@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import useTask from "./hooks/useTask";
 import Loader from "../../components/Loader";
 import Arrange from "./components/Arrange";
@@ -12,10 +11,11 @@ import EditStepForm from "./components/Lists/EditStepForm";
 import NewStepForm from "./components/Lists/NewStepForm";
 import "./index.scss";
 
-export default function DayView() {
+export default function Day() {
   const {
     listOfTasks,
     isLoading,
+    onStart,
     handleCreateTask,
     handleDeleteTask,
     handleEditTask,
@@ -25,7 +25,7 @@ export default function DayView() {
   } = useTask();
 
   return (
-    <div className="day_view">
+    <div className="day">
       <Arrange
         listOfTasks={listOfTasks}
         isLoading={isLoading}

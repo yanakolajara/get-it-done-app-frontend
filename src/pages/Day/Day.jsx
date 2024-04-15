@@ -10,13 +10,15 @@ import Step from "./components/Lists/Step";
 import EditStepForm from "./components/Lists/EditStepForm";
 import NewStepForm from "./components/Lists/NewStepForm";
 import "./index.scss";
+import { useNavigate } from "react-router-dom";
 
 function Day() {
+  const navigate = useNavigate();
   const {
     listOfTasks,
     isLoading,
-    onEdit,
-    setOnEdit,
+    onStart,
+    setOnStart,
     handleCreateTask,
     handleDeleteTask,
     handleEditTask,
@@ -77,7 +79,7 @@ function Day() {
           </ListTask>
         )}
       </List>
-      <button>Create</button>
+      <button onClick={() => navigate("/start")}>Create</button>
     </div>
   );
 }

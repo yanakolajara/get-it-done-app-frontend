@@ -11,7 +11,7 @@ export default function AppUI() {
       <Routes>
         {/* <Route path="/" element={<Home />} /> */}
         <Route path="/day" element={<Day />} />
-        <Route path="/start" element={<Start />} />
+        <Route path="/day/start" element={<Start />} />
         {/* <Route path="/week" element={<WeekView />} /> */}
       </Routes>
       {/* <Navbar /> */}

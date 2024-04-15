@@ -1,4 +1,4 @@
-import useTask from "./hooks/useTask";
+import useTask from "../../hooks/useTask";
 import Loader from "../../components/Loader";
 import Arrange from "./components/Arrange";
 import Task from "./components/Arrange/Task";

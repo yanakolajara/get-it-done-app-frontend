@@ -9,9 +9,9 @@ import {
   editTaskWithTaskId,
   getChildTaskFromTaskId,
   getTasksFromUserID,
-} from "../../../api/api";
-import useAuth from "../../../hooks/useAuth";
-import sortTaskList from "../../../utils/sortTaskList";
+} from "../api/api";
+import useAuth from "./useAuth";
+import sortTaskList from "../utils/sortTaskList";
 
 function useTask() {
   const { userId } = useAuth();

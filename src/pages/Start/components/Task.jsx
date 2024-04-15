@@ -1,6 +1,7 @@
 import "./Task.scss";
 
-function Task(props) {
+function Task({ props }) {
+  console.log("🚀 ~ Task ~ props:", props);
   return (
     <section className="Task">
       {/* <header className="taskContainer__header">

@@ -140,4 +140,4 @@ function useTask() {
   };
 }
 
-export default useTask;
+export { useTask };

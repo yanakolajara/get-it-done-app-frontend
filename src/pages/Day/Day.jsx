@@ -79,7 +79,7 @@ function Day() {
           </ListTask>
         )}
       </List>
-      <button onClick={() => navigate("/start")}>Create</button>
+      <button onClick={() => navigate("/day/start")}>Create</button>
     </div>
   );
 }

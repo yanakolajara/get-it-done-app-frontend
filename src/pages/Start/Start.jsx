@@ -2,8 +2,10 @@ import { useTask } from "../../hooks/useTask";
 import { Step } from "./components/Step";
 import "./Start.scss";
 import { Task } from "./components/Task";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Start() {
+  const navigate = useNavigate();
   const {
     listOfTasks,
     isLoading,
@@ -32,6 +34,7 @@ function Start() {
           </Task>
         ))}
       </div>
+      <button onClick={() => navigate("/day")}>Back to Edit</button>
     </div>
   );
 }

@@ -11,11 +11,12 @@ import EditStepForm from "./components/Lists/EditStepForm";
 import NewStepForm from "./components/Lists/NewStepForm";
 import "./index.scss";
 
-export default function Day() {
+function Day() {
   const {
     listOfTasks,
     isLoading,
-    onStart,
+    onEdit,
+    setOnEdit,
     handleCreateTask,
     handleDeleteTask,
     handleEditTask,
@@ -30,9 +31,6 @@ export default function Day() {
         listOfTasks={listOfTasks}
         isLoading={isLoading}
         onLoading={() => <Loader />}
-        showForm={() => (
-          <NewTaskForm onCreate={(body) => handleCreateTask(body)} />
-        )}
       >
         {(taskObj) => (
           <Task
@@ -79,6 +77,9 @@ export default function Day() {
           </ListTask>
         )}
       </List>
+      <button>Create</button>
     </div>
   );
 }
+
+export { Day };

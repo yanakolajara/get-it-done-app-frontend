@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Day from "./pages/Day";
+import { Day } from "./pages/Day/Day";
 // import Home from "../draft/Home";
 // import WeekView from "../draft/WeekView";
 

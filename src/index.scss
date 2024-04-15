@@ -12,7 +12,8 @@ body {
   );
 }
 
-button {
+button,
+.button {
   &:hover {
     cursor: pointer;
   }

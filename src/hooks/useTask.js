@@ -11,7 +11,7 @@ import {
   getTasksFromUserID,
 } from "../api/api";
 import useAuth from "./useAuth";
-import sortTaskList from "../utils/sortTaskList";
+import { sortSteps, sortTaskList } from "../utils/sortData";
 
 function useTask() {
   const { userId } = useAuth();

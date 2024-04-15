@@ -1,0 +1,14 @@
+.stepContainer {
+  display: flex;
+  align-self: stretch;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(128, 128, 128, 0.287);
+  border-radius: 0.5rem;
+}
+
+.completed {
+  background-color: rgb(24, 233, 24);
+}

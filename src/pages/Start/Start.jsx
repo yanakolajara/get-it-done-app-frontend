@@ -1,4 +1,5 @@
 import { useTask } from "../../hooks/useTask";
+import { Step } from "./components/Step";
 import "./Start.scss";
 import { Task } from "./components/Task";
 
@@ -19,9 +20,17 @@ function Start() {
   return (
     <div className="Start">
       <div className="Start__container container-glass">
-        {listOfTasks.map((task) => {
-          return <Task taskData={task} />;
-        })}
+        {listOfTasks.map((taskData) => (
+          <Task taskData={taskData}>
+            {(stepData) => (
+              <Step
+                stepData={stepData}
+                isCompleted={stepData.completed}
+                onComplete={handleCompleteStep}
+              />
+            )}
+          </Task>
+        ))}
       </div>
     </div>
   );

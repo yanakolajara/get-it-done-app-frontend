@@ -1,84 +1,57 @@
-import { useTask } from "../../hooks/useTask";
-import Loader from "../../components/Loader";
-import Arrange from "./components/Arrange";
-import Task from "./components/Arrange/Task";
-import EditTaskForm from "./components/Arrange/EditTaskForm";
-import NewTaskForm from "./components/Arrange/NewTaskForm";
+import "./Day.scss";
+import { useNavigate } from "react-router-dom";
+import { useData } from "../../hooks/useData";
+import Loader from "../../components/Loader/Loader";
+import { Arrange } from "./Arrange";
+
 import List from "./components/Lists";
 import ListTask from "./components/Lists/TaskContainer";
 import Step from "./components/Lists/Step";
 import EditStepForm from "./components/Lists/EditStepForm";
 import NewStepForm from "./components/Lists/NewStepForm";
-import "./index.scss";
-import { useNavigate } from "react-router-dom";
+import { Task } from "../../components/Task/Task";
 
 function Day() {
   const navigate = useNavigate();
-  const {
-    listOfTasks,
-    isLoading,
-    onStart,
-    setOnStart,
-    handleCreateTask,
-    handleDeleteTask,
-    handleEditTask,
-    handleAddStep,
-    handleDeleteStep,
-    handleCompleteStep,
-  } = useTask();
+  const { states, updaters } = useData();
+  const { data: tasks, loading } = states;
+  const { onGet, onCreate, onEdit, onDelete, onCreateStep } = updaters;
 
   return (
     <div className="day">
       <Arrange
-        listOfTasks={listOfTasks}
-        isLoading={isLoading}
+        tasks={tasks}
+        loading={loading}
         onLoading={() => <Loader />}
-      >
-        {(taskObj) => (
-          <Task
-            taskObj={taskObj}
-            onDelete={(task_id) => handleDeleteTask(task_id)}
-          >
-            <EditTaskForm
-              content={taskObj.content}
-              id={taskObj.id}
-              onEdit={(id, body) => handleEditTask(id, body)}
-            />
-          </Task>
-        )}
-      </Arrange>
+        onCreate={({ userId, body }) => onCreate({ userId, body })}
+        render={Task}
+      />
 
-      <List
-        listOfTasks={listOfTasks}
-        isLoading={isLoading}
-        onLoading={() => <Loader />}
-      >
+      {/* <List tasks={tasks} loading={loading} onLoading={() => <Loader />}>
         {(taskObj) => (
           <ListTask
             taskObj={taskObj}
-            isLoading={isLoading}
+            loading={loading}
             onLoading={() => <Loader />}
             newStepForm={() => (
               <NewStepForm
-                task_id={taskObj.id}
-                handleAddStep={(task_id, body) => handleAddStep(task_id, body)}
+                taskId={taskObj.id}
+                handleAddStep={(taskId, body) => onCreateStep(taskId, body)}
               />
             )}
           >
             {taskObj.childTasks.map((stepObj) => (
               <Step
                 stepObj={stepObj}
-                onDelete={(step_id) => handleDeleteStep(step_id)}
-                onComplete={(step_id, body) =>
-                  handleCompleteStep(step_id, body)
-                }
+                onDelete={(step_id) => onDelete(step_id)}
+                onComplete={(step_id, body) => onEdit(step_id, body)}
               >
-                {/* <EditStepForm /> */}
+
               </Step>
             ))}
           </ListTask>
         )}
-      </List>
+      </List> */}
       <button onClick={() => navigate("/day/start")}>Create</button>
     </div>
   );

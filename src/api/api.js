@@ -1,36 +1,32 @@
 import Axios from "./axios";
 
-const getTasksFromUserID = async (user_id) => {
+const getTasks = async (userId) => {
   try {
-    const response = await Axios.get(`/tasks/${user_id}`);
-    return response;
+    return await Axios.get(`/tasks/${userId}`);
   } catch (error) {
     return error.response;
   }
 };
 
-const createNewTask = async (user_id, body) => {
+const createTask = async ({ userId, body }) => {
   try {
-    const response = await Axios.post(`/tasks/${user_id}`, body);
-    return response;
+    return await Axios.post(`/tasks/${userId}`, body);
   } catch (error) {
     return error.response;
   }
 };
 
-const editTaskWithTaskId = async (task_id, body) => {
+const editTask = async ({ taskId, body }) => {
   try {
-    const response = await Axios.put(`/tasks/${task_id}`, body);
-    return response;
+    return await Axios.put(`/tasks/${taskId}`, body);
   } catch (error) {
     return error.response;
   }
 };
 
-const deleteTaskWithTaskId = async (task_id) => {
+const deleteTask = async ({ taskId }) => {
   try {
-    const response = await Axios.delete(`/tasks/${task_id}`);
-    return response;
+    return await Axios.delete(`/tasks/${taskId}`);
   } catch (error) {
     return error.response;
   }
@@ -38,55 +34,45 @@ const deleteTaskWithTaskId = async (task_id) => {
 
 //* --------- childTasks ----------- *//
 
-const getChildTaskFromTaskId = async (task_id) => {
+const getSteps = async ({ taskId }) => {
   try {
-    const response = await Axios.get(`/childTasks/${task_id}`);
-    return response;
-  } catch (error) {
-    console.log("here is the problem");
-    return error;
-  }
-};
-
-const createChildTask = async (task_id, body) => {
-  try {
-    const response = await Axios.post(`/childTasks/${task_id}`, body);
-    return response;
+    return await Axios.get(`/steps/${taskId}`);
   } catch (error) {
     return error;
   }
 };
 
-const changeCompletionStatus = async (task_id, body) => {
+const createStep = async ({ taskId, body }) => {
   try {
-    const response = await Axios.put(
-      `/childTasks/completionStatus/${task_id}`,
-      body
-    );
-    return response;
+    return await Axios.post(`/steps/${taskId}`, body);
   } catch (error) {
     return error;
   }
 };
 
-const deleteChildTask = async (task_id) => {
+const editStep = async ({ stepId, body }) => {
   try {
-    const response = await Axios.delete(`childTasks/${task_id}`);
-    console.log("deleteChildTask.response: ", response);
-    return response;
+    return await Axios.put(`/steps/${stepId}`, body);
   } catch (error) {
-    console.log("deleteChildTask.error: ", error);
+    return error;
+  }
+};
+
+const deleteChildTask = async (stepId) => {
+  try {
+    return await Axios.delete(`/steps/${stepId}`);
+  } catch (error) {
     return error;
   }
 };
 
 export {
-  getTasksFromUserID,
-  createNewTask,
-  editTaskWithTaskId,
-  deleteTaskWithTaskId,
-  getChildTaskFromTaskId,
-  createChildTask,
+  getTasks,
+  createTask,
+  editTask,
+  deleteTask,
+  getSteps,
+  createStep,
+  editStep,
   deleteChildTask,
-  changeCompletionStatus,
 };

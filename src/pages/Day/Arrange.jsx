@@ -1,13 +1,12 @@
+import "./Arrange.scss";
 import React, { useEffect, useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
-import "./index.scss";
+import { render } from "@testing-library/react";
 
-export default function Arrange(props) {
-  const renderFunc = props.loading
-    ? props.onLoading
-    : props.children || props.render;
+function Arrange(props) {
   const [newTaskContent, setNewTaskContent] = useState();
-
+  const renderFunc = props.children || props.render;
+  console.log(props);
   return (
     <div className="container-glass orderTaskContainer">
       <h1>Task order</h1>
@@ -27,8 +26,14 @@ export default function Arrange(props) {
         <button className="create-task-form__submit-btn" type="submit">
           <IoMdAddCircle className="create-task-form__submit-btn__icon" />
         </button>
+        {props.tasks.map((props) =>
+          new renderFunc({
+            ...props,
+          }).render()
+        )}
       </form>
-      {props.listOfTasks.map(renderFunc)}
     </div>
   );
 }
+
+export { Arrange };

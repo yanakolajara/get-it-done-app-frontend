@@ -32,15 +32,12 @@ function useData() {
   const initialState = {
     data: [],
     loading: true,
-    // error: false,
-    // edit: true,
-    // success: false,
   };
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
   const { data, loading, error } = state;
 
-  const onGet = async ({ userId }) => {
+  const onGetTask = async ({ userId }) => {
     try {
       const tasks = await getTasks(userId);
       const tasksWithSteps = await Promise.all(
@@ -65,7 +62,7 @@ function useData() {
       });
     }
   };
-  const onCreate = async ({ userId, body }) => {
+  const onCreateTask = async ({ userId, body }) => {
     try {
       await createTask({ userId: userId, body: body }).then(() =>
         dispatch({
@@ -79,7 +76,7 @@ function useData() {
       });
     }
   };
-  const onEdit = async ({ taskId, body }) => {
+  const onEditTask = async ({ taskId, body }) => {
     try {
       await editTask({ taskId: taskId, body: body }).then((response) =>
         dispatch({
@@ -93,7 +90,7 @@ function useData() {
       });
     }
   };
-  const onDelete = async ({ taskId }) => {
+  const onDeleteTask = async ({ taskId }) => {
     try {
       await deleteTask({ taskId }).then((response) =>
         dispatch({
@@ -146,7 +143,7 @@ function useData() {
         })
       );
     loading &&
-      onGet({ userId }).then((response) => {
+      onGetTask({ userId }).then((response) => {
         console.log("data fetched: ", response);
       });
 
@@ -159,10 +156,10 @@ function useData() {
   };
 
   const updaters = {
-    onGet,
-    onCreate,
-    onEdit,
-    onDelete,
+    onGetTask,
+    onCreateTask,
+    onEditTask,
+    onDeleteTask,
     onCreateStep,
     onDeleteStep,
   };

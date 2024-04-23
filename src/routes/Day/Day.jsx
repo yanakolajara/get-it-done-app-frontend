@@ -2,31 +2,58 @@ import "./Day.scss";
 import { useNavigate } from "react-router-dom";
 import { useData } from "../../hooks/useData";
 import Loader from "../../components/Loader/Loader";
-import { Arrange } from "./Arrange";
+import { EditTasks } from "./EditTasks";
+import { EditSteps } from "./EditSteps";
 
-import List from "./components/Lists";
-import ListTask from "./components/Lists/TaskContainer";
-import Step from "./components/Lists/Step";
-import EditStepForm from "./components/Lists/EditStepForm";
-import NewStepForm from "./components/Lists/NewStepForm";
+import ListTask from "../../components/Task/TaskContainer";
+import EditStepForm from "./EditStepsContainer/EditStepForm";
+import NewStepForm from "./EditStepsContainer/NewStepForm";
 import { Task } from "../../components/Task/Task";
-
+import { Step } from "../../components/Step/Step";
 function Day() {
   const navigate = useNavigate();
   const { states, updaters } = useData();
   const { data: tasks, loading } = states;
-  const { onGet, onCreate, onEdit, onDelete, onCreateStep } = updaters;
+  const {
+    onGetTask,
+    onCreateTask,
+    onEditTask,
+    onDeleteTask,
+    onCreateStep,
+    onEditStep,
+    onDeleteStep,
+  } = updaters;
 
   return (
     <div className="day">
-      <Arrange
+      <EditTasks
         tasks={tasks}
         loading={loading}
         onLoading={() => <Loader />}
-        onCreate={({ userId, body }) => onCreate({ userId, body })}
-        render={Task}
-      />
+        createTask={({ userId, body }) => onCreateTask({ userId, body })}
+      >
+        {(data) => <Task data={data} role="edit" />}
+      </EditTasks>
 
+      <EditSteps
+        tasks={tasks}
+        loading={loading}
+        onLoading={() => <Loader />}
+        createStep={({ taskId, body }) => onCreateStep({ taskId, body })}
+      >
+        {(data) => (
+          <Task data={data} role="container">
+            {(data) => (
+              <Step
+                data={data}
+                role="edit"
+                onDeleteStep={(stepId) => onDeleteStep({ stepId })}
+                onEditStep={(stepId, body) => onEditStep({ stepId, body })}
+              />
+            )}
+          </Task>
+        )}
+      </EditSteps>
       {/* <List tasks={tasks} loading={loading} onLoading={() => <Loader />}>
         {(taskObj) => (
           <ListTask

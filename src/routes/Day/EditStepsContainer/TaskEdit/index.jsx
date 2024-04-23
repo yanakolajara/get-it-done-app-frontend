@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { completedStepsCount } from "../../../../../utils/completedStepsCount";
+import { completedStepsCount } from "../../../../utils/completedStepsCount";
 import "./index.scss";
 
 function TaskEdit(props) {

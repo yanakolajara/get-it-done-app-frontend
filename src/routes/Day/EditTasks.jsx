@@ -1,15 +1,14 @@
-import "./Arrange.scss";
+import "./EditTasks.scss";
 import React, { useEffect, useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
 import { render } from "@testing-library/react";
 
-function Arrange(props) {
+function EditTasks(props) {
   const [newTaskContent, setNewTaskContent] = useState();
   const renderFunc = props.children || props.render;
-  console.log(props);
   return (
     <div className="container-glass orderTaskContainer">
-      <h1>Task order</h1>
+      <h1>Edit Tasks</h1>
       <form
         className="create-task-form"
         onSubmit={async (e) => {
@@ -26,14 +25,10 @@ function Arrange(props) {
         <button className="create-task-form__submit-btn" type="submit">
           <IoMdAddCircle className="create-task-form__submit-btn__icon" />
         </button>
-        {props.tasks.map((props) =>
-          new renderFunc({
-            ...props,
-          }).render()
-        )}
+        {props.tasks.map(renderFunc)}
       </form>
     </div>
   );
 }
 
-export { Arrange };
+export { EditTasks };

@@ -1,6 +1,6 @@
 import { MdCancel, MdCheckCircle } from "react-icons/md";
 import React, { useState } from "react";
-import handleEditTask from "../../../../hooks/useData";
+import handleEditTask from "../../../hooks/useData";
 
 export default function EditTaskForm(props) {
   //   <EditTaskForm

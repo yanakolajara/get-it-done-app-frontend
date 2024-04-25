@@ -7,7 +7,7 @@ import { EditSteps } from "./EditSteps";
 
 import ListTask from "../../components/Task/TaskContainer";
 import EditStepForm from "./EditStepsContainer/EditStepForm";
-import NewStepForm from "./EditStepsContainer/NewStepForm";
+// import NewStepForm from "../../components/Task/CreateStepForm";
 import { Task } from "../../components/Task/Task";
 import { Step } from "../../components/Step/Step";
 function Day() {
@@ -35,14 +35,16 @@ function Day() {
         {(data) => <Task data={data} role="edit" />}
       </EditTasks>
 
-      <EditSteps
-        tasks={tasks}
-        loading={loading}
-        onLoading={() => <Loader />}
-        createStep={({ taskId, body }) => onCreateStep({ taskId, body })}
-      >
+      <EditSteps tasks={tasks} loading={loading} onLoading={() => <Loader />}>
         {(data) => (
-          <Task data={data} role="container">
+          <Task
+            data={data}
+            role="container"
+            createStep={({ taskId, body }) =>
+              onCreateStep({ taskId: taskId, body: body })
+            }
+            onLoading={() => <Loader />}
+          >
             {(data) => (
               <Step
                 data={data}

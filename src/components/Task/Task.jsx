@@ -9,21 +9,30 @@ class Task extends React.Component {
     super(props);
     this.state = {
       showForm: false,
-      formInput: "",
+      formContent: "",
       loading: false,
     };
     this.data = props.data;
-    this.role = props.role;
-    this.children = props.children;
-    this.onEdit = props.onEdit;
+    this.createStep = this.createStep.bind(this);
+    this.onLoading = props.onLoading;
   }
-  // taskObj={taskObj} onDelete={(taskId) => onDelete({ taskId })
+
+  async createStep(e) {
+    e.preventDefault();
+    await this.props.createStep({
+      taskId: this.data.id,
+      body: {
+        content: this.state.formContent,
+      },
+    });
+  }
 
   render() {
-    switch (this.role) {
+    this.state.loading && this.onLoading();
+    switch (this.props.role) {
       case "edit":
         return (
-          <div className={`${this.role}-task`}>
+          <section className="edit-task">
             {/* {this.state.showForm && children} */}
             <MdDragIndicator className={`${this.role}-task__drag-icon`} />
             <div className={`${this.role}-task__box`}>
@@ -49,20 +58,33 @@ class Task extends React.Component {
               />
             </div>
             {this.role === "container" && this.data.steps.map(this.children)}
-          </div>
+          </section>
         );
 
       case "container":
         return (
           <article className="container-task">
-            <header className="container-task__header">
+            <header>
               <p>{this.data.content}</p>
+              <form onSubmit={this.createStep}>
+                <input
+                  type="text"
+                  value={this.state.formContent}
+                  onChange={(e) =>
+                    this.setState({ formContent: e.target.value })
+                  }
+                />
+                <input type="submit" value="Add Step" />
+              </form>
             </header>
-            <section>{this.data.steps.map(this.children)}</section>
+            <section>{this.data.steps.map(this.props.children)}</section>
+            <footer>
+              <p>0/{this.data.steps.length}</p>
+            </footer>
           </article>
         );
       default:
-        return this.children;
+        return null;
     }
   }
 }

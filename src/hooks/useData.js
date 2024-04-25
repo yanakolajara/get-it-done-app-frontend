@@ -108,7 +108,7 @@ function useData() {
 
   const onCreateStep = async ({ taskId, body }) => {
     try {
-      await createStep({ userId: taskId, body: body }).then(() =>
+      await createStep({ taskId: taskId, body: body }).then(() =>
         dispatch({
           type: actionTypes.success,
         })

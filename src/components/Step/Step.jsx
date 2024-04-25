@@ -3,6 +3,7 @@ import React from "react";
 // import { TiEdit } from "react-icons/ti";
 // import { RiDeleteBin5Fill } from "react-icons/ri";
 import "./Step.scss";
+import Loader from "../Loader/Loader";
 
 class Step extends React.Component {
   constructor(props) {
@@ -15,34 +16,39 @@ class Step extends React.Component {
     this.data = props.data;
     this.role = props.role;
   }
-  // taskObj={taskObj} onDelete={(taskId) => onDelete({ taskId })
+
+  async deleteStep(e) {
+    e.preventDefault();
+    await this.props.onDelete({ stepId: this.data.id });
+  }
+
+  async editStepStatus(e) {
+    e.preventDefault();
+    await this.props.onEdit({
+      stepId: this.data.id,
+      body: {
+        ...this.data,
+        isCompleted: !this.data.completed,
+      },
+    });
+  }
 
   render() {
-    return (
-      <article className={`${this.role}-step`}>
-        <p className="childTask__content">{this.data.content}</p>
-        <div className="childTask__options">
-          <button
-            onClick={async (e) => {
-              e.preventDefault();
-              await this.onDeleteStep(this.data.id);
-            }}
-          >
-            🗑️
-          </button>
-          <button
-            onClick={async (e) => {
-              e.preventDefault();
-              await this.onCompleteStep(this.data.id, {
-                isCompleted: !this.data.completed,
-              });
-            }}
-          >
-            ✅
-          </button>
-        </div>
-      </article>
-    );
+    this.state.loading && <Loader />;
+    switch (this.role) {
+      case "edit":
+        return (
+          <article className={`${this.role}-step`}>
+            <p className={`${this.role}-step__content`}>{this.data.content}</p>
+            <div className={`${this.role}-step__options`}>
+              <button onClick={this.deleteStep}>🗑️</button>
+              <button onClick={this.editStepStatus}>✅</button>
+            </div>
+          </article>
+        );
+      default:
+        return null;
+    }
   }
 }
 

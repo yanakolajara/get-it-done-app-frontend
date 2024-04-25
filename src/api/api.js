@@ -58,10 +58,14 @@ const editStep = async ({ stepId, body }) => {
   }
 };
 
-const deleteChildTask = async (stepId) => {
+const deleteStep = async ({ stepId }) => {
   try {
-    return await Axios.delete(`/steps/${stepId}`);
+    console.log("before", stepId);
+    const response = await Axios.delete(`/steps/${stepId}`);
+    console.log("response", response);
+    return response;
   } catch (error) {
+    console.log("error", error);
     return error;
   }
 };
@@ -74,5 +78,5 @@ export {
   getSteps,
   createStep,
   editStep,
-  deleteChildTask,
+  deleteStep,
 };

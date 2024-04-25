@@ -47,8 +47,8 @@ function Day() {
               <Step
                 data={data}
                 role="edit"
-                onDeleteStep={(stepId) => onDeleteStep({ stepId })}
-                onEditStep={(stepId, body) => onEditStep({ stepId, body })}
+                onDelete={({ stepId }) => onDeleteStep({ stepId })}
+                onEdit={({ stepId, body }) => onEditStep({ stepId, body })}
               />
             )}
           </Task>

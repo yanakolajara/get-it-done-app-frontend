@@ -7,6 +7,7 @@ import {
   editTask,
   createStep,
   getSteps,
+  deleteStep,
 } from "../api/api";
 // import useAuth from "./useAuth";
 import { sortTaskList } from "../utils/sortData";
@@ -121,7 +122,7 @@ function useData() {
   };
   const onDeleteStep = async ({ stepId }) => {
     try {
-      await deleteTask({ stepId: stepId }).then(() =>
+      await deleteStep({ stepId: stepId }).then((response) =>
         dispatch({
           type: actionTypes.success,
         })

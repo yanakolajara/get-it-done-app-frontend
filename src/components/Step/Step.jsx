@@ -28,10 +28,10 @@ function Step(props) {
         <article className="static-step">
           <p className="static-step__content">{props.data.content}</p>
           <div className="static-step__options">
-            <button onClick={() => props.onDelete({ stepId: props.data.id })}>
+            {/* <button onClick={() => props.onDelete({ stepId: props.data.id })}>
               🗑️
             </button>
-            <button onClick={switchStatus}>✅</button>
+            <button onClick={switchStatus}>✅</button> */}
           </div>
         </article>
       );

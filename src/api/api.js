@@ -2,7 +2,8 @@ import Axios from "./axios";
 
 const getTasks = async (userId) => {
   try {
-    return (await Axios.get(`/tasks/${userId}`)).data;
+    const response = await Axios.get(`/tasks/${userId}`);
+    return response.data.message ? [] : response.data;
   } catch (error) {
     return [];
   }
@@ -10,7 +11,8 @@ const getTasks = async (userId) => {
 
 const createTask = async ({ userId, body }) => {
   try {
-    return (await Axios.post(`/tasks/${userId}`, body)).data;
+    const response = await Axios.post(`/tasks/${userId}`, body);
+    return response.data.message ? [] : response.data;
   } catch (error) {
     return [];
   }
@@ -18,7 +20,8 @@ const createTask = async ({ userId, body }) => {
 
 const editTask = async ({ taskId, body }) => {
   try {
-    return (await Axios.put(`/tasks/${taskId}`, body)).data;
+    const response = await Axios.put(`/tasks/${taskId}`, body);
+    return response.data.message ? [] : response.data;
   } catch (error) {
     return [];
   }
@@ -26,7 +29,8 @@ const editTask = async ({ taskId, body }) => {
 
 const deleteTask = async ({ taskId }) => {
   try {
-    return (await Axios.delete(`/tasks/${taskId}`)).data;
+    const response = await Axios.delete(`/tasks/${taskId}`);
+    return response.data.message ? [] : response.data;
   } catch (error) {
     return [];
   }
@@ -36,7 +40,8 @@ const deleteTask = async ({ taskId }) => {
 
 const getSteps = async ({ taskId }) => {
   try {
-    return (await Axios.get(`/steps/${taskId}`)).data;
+    const response = await Axios.get(`/steps/${taskId}`);
+    return response.data.message ? [] : response.data;
   } catch (error) {
     return [];
   }
@@ -44,7 +49,8 @@ const getSteps = async ({ taskId }) => {
 
 const createStep = async ({ taskId, body }) => {
   try {
-    return (await Axios.post(`/steps/${taskId}`, body)).data;
+    const response = await Axios.post(`/steps/${taskId}`, body);
+    return response.data.message ? [] : response.data;
   } catch (error) {
     return [];
   }
@@ -52,7 +58,8 @@ const createStep = async ({ taskId, body }) => {
 
 const editStep = async ({ stepId, body }) => {
   try {
-    return (await Axios.put(`/steps/${stepId}`, body)).data;
+    const response = await Axios.put(`/steps/${stepId}`, body);
+    return response.data.message ? [] : response.data;
   } catch (error) {
     return [];
   }
@@ -60,7 +67,8 @@ const editStep = async ({ stepId, body }) => {
 
 const deleteStep = async ({ stepId }) => {
   try {
-    return (await Axios.delete(`/steps/${stepId}`)).data;
+    const response = await Axios.delete(`/steps/${stepId}`);
+    return response.data.message ? [] : response.data;
   } catch (error) {
     return [];
   }

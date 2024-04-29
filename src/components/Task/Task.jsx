@@ -8,19 +8,19 @@ function Task(props) {
   const [content, setContent] = React.useState("");
   const [showForm, setShowForm] = React.useState(false);
 
-  const createStep = (e) => {
+  const handleSubmit = (e) => {
     console.log(e);
-    e.preventDefault();
-    props
-      .createStep({
-        taskId: props.data.id,
-        body: {
-          content,
-        },
-      })
-      .then(() => {
-        setContent("");
-      });
+    // e.preventDefault();
+    // props
+    //   .createStep({
+    //     taskId: props.data.id,
+    //     body: {
+    //       content,
+    //     },
+    //   })
+    //   .then(() => {
+    //     setContent("");
+    //   });
   };
 
   const deleteTask = (e) => {
@@ -44,7 +44,10 @@ function Task(props) {
           <div>
             <button
               className="btn task-static"
-              onClick={(e) => setShowForm(!showForm)}
+              onClick={(e) => {
+                e.preventDefault();
+                setShowForm(!showForm);
+              }}
             >
               Edit
             </button>
@@ -59,7 +62,7 @@ function Task(props) {
         <article className="container-task">
           <header>
             <p>{props.data.content}</p>
-            <form onSubmit={createStep}>
+            <form onSubmit={(e) => handleSubmit(e)}>
               <input
                 type="text"
                 value={content}

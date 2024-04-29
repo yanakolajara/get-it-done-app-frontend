@@ -8,6 +8,7 @@ function EditTasks(props) {
   const renderFunc = props.children || props.render;
 
   const createTask = (e) => {
+    console.log(e);
     e.preventDefault();
     props.onCreate({ body: { content } });
   };
@@ -15,7 +16,7 @@ function EditTasks(props) {
   return (
     <div className="container-glass orderTaskContainer">
       <h1>Edit Tasks</h1>
-      <form className="create-task-form" onSubmit={createTask}>
+      <form className="create-task-form" onSubmit={(e) => createTask(e)}>
         <input
           className="create-task-form__content"
           type="text"

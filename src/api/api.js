@@ -2,33 +2,33 @@ import Axios from "./axios";
 
 const getTasks = async (userId) => {
   try {
-    return await Axios.get(`/tasks/${userId}`);
+    return (await Axios.get(`/tasks/${userId}`)).data;
   } catch (error) {
-    return error.response;
+    return [];
   }
 };
 
 const createTask = async ({ userId, body }) => {
   try {
-    return await Axios.post(`/tasks/${userId}`, body);
+    return (await Axios.post(`/tasks/${userId}`, body)).data;
   } catch (error) {
-    return error.response;
+    return [];
   }
 };
 
 const editTask = async ({ taskId, body }) => {
   try {
-    return await Axios.put(`/tasks/${taskId}`, body);
+    return (await Axios.put(`/tasks/${taskId}`, body)).data;
   } catch (error) {
-    return error.response;
+    return [];
   }
 };
 
 const deleteTask = async ({ taskId }) => {
   try {
-    return await Axios.delete(`/tasks/${taskId}`);
+    return (await Axios.delete(`/tasks/${taskId}`)).data;
   } catch (error) {
-    return error.response;
+    return [];
   }
 };
 
@@ -36,38 +36,33 @@ const deleteTask = async ({ taskId }) => {
 
 const getSteps = async ({ taskId }) => {
   try {
-    return await Axios.get(`/steps/${taskId}`);
+    return (await Axios.get(`/steps/${taskId}`)).data;
   } catch (error) {
-    return error;
+    return [];
   }
 };
 
 const createStep = async ({ taskId, body }) => {
   try {
-    console.log("body", body);
-    return await Axios.post(`/steps/${taskId}`, body);
+    return (await Axios.post(`/steps/${taskId}`, body)).data;
   } catch (error) {
-    return error;
+    return [];
   }
 };
 
 const editStep = async ({ stepId, body }) => {
   try {
-    return await Axios.put(`/steps/${stepId}`, body);
+    return (await Axios.put(`/steps/${stepId}`, body)).data;
   } catch (error) {
-    return error;
+    return [];
   }
 };
 
 const deleteStep = async ({ stepId }) => {
   try {
-    console.log("before", stepId);
-    const response = await Axios.delete(`/steps/${stepId}`);
-    console.log("response", response);
-    return response;
+    return (await Axios.delete(`/steps/${stepId}`)).data;
   } catch (error) {
-    console.log("error", error);
-    return error;
+    return [];
   }
 };
 

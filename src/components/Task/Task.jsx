@@ -9,6 +9,7 @@ function Task(props) {
   const [showForm, setShowForm] = React.useState(false);
 
   const createStep = (e) => {
+    console.log(e);
     e.preventDefault();
     props
       .createStep({
@@ -34,22 +35,22 @@ function Task(props) {
   }
 
   switch (props.role) {
-    case "edit":
+    case "static":
       return (
-        <section className="edit-task">
-          <MdDragIndicator className="edit-task__drag-icon" />
-          <div className="edit-task__box">
-            <p className="edit-task__content">{props.data.content}</p>
-          </div>
-          <div className="edit-task__options">
-            <TiEdit
-              className="edit-task__options__icon"
-              onClick={() => setShowForm(!showForm)}
-            />
-            <RiDeleteBin5Fill
-              className="edit-task__options__icon"
-              onClick={deleteTask}
-            />
+        <section className="static-task">
+          <MdDragIndicator className="static-task__drag-icon" />
+
+          <p className="static-task__content">{props.data.content}</p>
+          <div>
+            <button
+              className="btn task-static"
+              onClick={(e) => setShowForm(!showForm)}
+            >
+              Edit
+            </button>
+            <button className="btn static-del" onClick={deleteTask}>
+              Delete
+            </button>
           </div>
         </section>
       );

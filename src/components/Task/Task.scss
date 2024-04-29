@@ -2,7 +2,7 @@
   display: flex;
 }
 
-.edit-task {
+.static-task {
   @include task;
   padding: 0px 12px;
   flex-direction: row;

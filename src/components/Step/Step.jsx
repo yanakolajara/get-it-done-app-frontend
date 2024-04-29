@@ -23,11 +23,11 @@ function Step(props) {
 
   // this.state.loading && <Loader />;
   switch (props.role) {
-    case "edit":
+    case "static":
       return (
-        <article className="edit-step">
-          <p className="edit-step__content">{props.data.content}</p>
-          <div className="edit-step__options">
+        <article className="static-step">
+          <p className="static-step__content">{props.data.content}</p>
+          <div className="static-step__options">
             <button onClick={() => props.onDelete({ stepId: props.data.id })}>
               🗑️
             </button>

@@ -35,7 +35,7 @@ function Day() {
         {(data) => (
           <Task
             data={data}
-            role="edit"
+            role="static"
             onDelete={onDeleteTask}
             onEdit={onEditTask}
           />
@@ -48,7 +48,7 @@ function Day() {
             {(data) => (
               <Step
                 data={data}
-                role="edit"
+                role="static"
                 onDelete={onDeleteStep}
                 onEdit={onEditStep}
               />

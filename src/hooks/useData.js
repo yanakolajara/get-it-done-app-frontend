@@ -43,9 +43,9 @@ function useData() {
     try {
       const tasks = await getTasks(userId);
       const tasksWithSteps = await Promise.all(
-        tasks.data.map(async (task) => {
+        tasks.map(async (task) => {
           const steps = await getSteps({ taskId: task.id }).then((response) => {
-            return response.data.message ? [] : response.data;
+            return response;
           });
           return {
             ...task,
@@ -53,6 +53,7 @@ function useData() {
           };
         })
       );
+      console.log(tasksWithSteps);
       dispatch({
         type: actionTypes.render,
         payload: tasksWithSteps,
@@ -65,6 +66,7 @@ function useData() {
     }
   };
   const onCreateTask = async ({ body }) => {
+    console.log({ userId: userId, body: body });
     try {
       await createTask({ userId: userId, body: body }).then(() => {
         dispatch({
@@ -80,7 +82,7 @@ function useData() {
   };
   const onEditTask = async ({ taskId, body }) => {
     try {
-      await editTask({ taskId: taskId, body: body }).then((response) =>
+      await editTask({ taskId: taskId, body: body }).then(() =>
         dispatch({
           type: actionTypes.success,
         })
@@ -94,7 +96,7 @@ function useData() {
   };
   const onDeleteTask = async ({ taskId }) => {
     try {
-      await deleteTask({ taskId }).then((response) =>
+      await deleteTask({ taskId }).then(() =>
         dispatch({
           type: actionTypes.success,
         })

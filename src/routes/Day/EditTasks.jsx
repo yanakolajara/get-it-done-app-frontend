@@ -25,7 +25,8 @@ function EditTasks(props) {
         <button className="create-task-form__submit-btn" type="submit">
           <IoMdAddCircle className="create-task-form__submit-btn__icon" />
         </button>
-        {props.tasks.map(renderFunc)}
+        {props.loading && props.onLoading()}
+        {!props.loading && props.tasks.map(renderFunc)}
       </form>
     </div>
   );

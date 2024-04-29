@@ -44,6 +44,7 @@ const getSteps = async ({ taskId }) => {
 
 const createStep = async ({ taskId, body }) => {
   try {
+    console.log("body", body);
     return await Axios.post(`/steps/${taskId}`, body);
   } catch (error) {
     return error;

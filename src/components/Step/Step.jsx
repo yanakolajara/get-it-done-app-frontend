@@ -5,50 +5,38 @@ import React from "react";
 import "./Step.scss";
 import Loader from "../Loader/Loader";
 
-class Step extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showForm: false,
-      formInput: "",
-      loading: false,
-    };
-    this.data = props.data;
-    this.role = props.role;
-  }
+function Step(props) {
+  const [showForm, setShowForm] = React.useState(false);
+  const [content, setContent] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
-  async deleteStep(e) {
+  const switchStatus = (e) => {
     e.preventDefault();
-    await this.props.onDelete({ stepId: this.data.id });
-  }
-
-  async editStepStatus(e) {
-    e.preventDefault();
-    await this.props.onEdit({
-      stepId: this.data.id,
+    props.onEdit({
+      stepId: props.data.id,
       body: {
-        ...this.data,
-        isCompleted: !this.data.completed,
+        ...props.data,
+        isCompleted: !props.data.completed,
       },
     });
-  }
+  };
 
-  render() {
-    this.state.loading && <Loader />;
-    switch (this.role) {
-      case "edit":
-        return (
-          <article className={`${this.role}-step`}>
-            <p className={`${this.role}-step__content`}>{this.data.content}</p>
-            <div className={`${this.role}-step__options`}>
-              <button onClick={this.deleteStep}>🗑️</button>
-              <button onClick={this.editStepStatus}>✅</button>
-            </div>
-          </article>
-        );
-      default:
-        return null;
-    }
+  // this.state.loading && <Loader />;
+  switch (props.role) {
+    case "edit":
+      return (
+        <article className="edit-step">
+          <p className="edit-step__content">{props.data.content}</p>
+          <div className="edit-step__options">
+            <button onClick={() => props.onDelete({ stepId: props.data.id })}>
+              🗑️
+            </button>
+            <button onClick={switchStatus}>✅</button>
+          </div>
+        </article>
+      );
+    default:
+      return null;
   }
 }
 

@@ -4,88 +4,79 @@ import { TiEdit } from "react-icons/ti";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import "./Task.scss";
 
-class Task extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showForm: false,
-      formContent: "",
-      loading: false,
-    };
-    this.data = props.data;
-    this.createStep = this.createStep.bind(this);
-    this.onLoading = props.onLoading;
-  }
+function Task(props) {
+  const [data, setData] = React.useState(props.data);
+  const [loading, setLoading] = React.useState(false);
+  const [content, setContent] = React.useState("");
+  const [showForm, setShowForm] = React.useState(false);
 
-  async createStep(e) {
+  const createStep = (e) => {
     e.preventDefault();
-    await this.props.createStep({
-      taskId: this.data.id,
-      body: {
-        content: this.state.formContent,
-      },
+    props
+      .createStep({
+        taskId: props.data.id,
+        body: {
+          content: content,
+        },
+      })
+      .then(() => {
+        setContent("");
+      });
+  };
+
+  const deleteStep = (e) => {
+    e.preventDefault();
+    props.deleteStep({
+      stepId: props.data.id,
     });
+  };
+
+  if (props.loading) {
+    return props.onLoading();
   }
 
-  render() {
-    this.state.loading && this.onLoading();
-    switch (this.props.role) {
-      case "edit":
-        return (
-          <section className="edit-task">
-            {/* {this.state.showForm && children} */}
-            <MdDragIndicator className={`${this.role}-task__drag-icon`} />
-            <div className={`${this.role}-task__box`}>
-              <p className={`${this.role}-task__content`}>
-                {this.data.content}
-              </p>
-            </div>
-            <div className={`${this.role}-task__options`}>
-              <TiEdit
-                className={`${this.role}-task__options__icon`}
-                onClick={() =>
-                  this.setState((prevState) => ({
-                    showForm: !prevState.showForm,
-                  }))
-                }
+  switch (props.role) {
+    case "edit":
+      return (
+        <section className="edit-task">
+          <MdDragIndicator className="edit-task__drag-icon" />
+          <div className="edit-task__box">
+            <p className="edit-task__content">{props.data.content}</p>
+          </div>
+          <div className="edit-task__options">
+            <TiEdit
+              className="edit-task__options__icon"
+              onClick={() => setShowForm(!showForm)}
+            />
+            <RiDeleteBin5Fill
+              className="edit-task__options__icon"
+              onClick={deleteStep}
+            />
+          </div>
+        </section>
+      );
+    case "container":
+      return (
+        <article className="container-task">
+          <header>
+            <p>{props.data.content}</p>
+            <form onSubmit={createStep}>
+              <input
+                type="text"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
               />
-              <RiDeleteBin5Fill
-                className={`${this.role}-task__options__icon`}
-                onClick={async (e) => {
-                  e.preventDefault();
-                  await this.data.onDelete(this.data.id);
-                }}
-              />
-            </div>
-            {this.role === "container" && this.data.steps.map(this.children)}
-          </section>
-        );
-
-      case "container":
-        return (
-          <article className="container-task">
-            <header>
-              <p>{this.data.content}</p>
-              <form onSubmit={this.createStep}>
-                <input
-                  type="text"
-                  value={this.state.formContent}
-                  onChange={(e) =>
-                    this.setState({ formContent: e.target.value })
-                  }
-                />
-                <input type="submit" value="Add Step" />
-              </form>
-            </header>
-            <section>{this.data.steps.map(this.props.children)}</section>
-            <footer>
-              <p>0/{this.data.steps.length}</p>
-            </footer>
-          </article>
-        );
-      default:
-        return null;
-    }
+              <input type="submit" value="Add Step" />
+            </form>
+          </header>
+          <section>{props.data.steps.map(props.children)}</section>
+          <footer>
+            <p>0/{props.data.steps.length}</p>
+          </footer>
+        </article>
+      );
+    default:
+      return null;
   }
 }
 

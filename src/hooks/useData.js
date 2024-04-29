@@ -8,6 +8,7 @@ import {
   createStep,
   getSteps,
   deleteStep,
+  editStep,
 } from "../api/api";
 // import useAuth from "./useAuth";
 import { sortTaskList } from "../utils/sortData";
@@ -65,11 +66,11 @@ function useData() {
   };
   const onCreateTask = async ({ userId, body }) => {
     try {
-      await createTask({ userId: userId, body: body }).then(() =>
+      await createTask({ userId: userId, body: body }).then(() => {
         dispatch({
           type: actionTypes.success,
-        })
-      );
+        });
+      });
     } catch (error) {
       dispatch({
         type: actionTypes.error,
@@ -120,6 +121,22 @@ function useData() {
       });
     }
   };
+
+  const onEditStep = async ({ stepId, body }) => {
+    try {
+      await editStep({ stepId: stepId, body: body }).then((response) =>
+        dispatch({
+          type: actionTypes.success,
+        })
+      );
+    } catch (error) {
+      dispatch({
+        type: actionTypes.error,
+        payload: error,
+      });
+    }
+  };
+
   const onDeleteStep = async ({ stepId }) => {
     try {
       await deleteStep({ stepId: stepId }).then((response) =>
@@ -147,8 +164,6 @@ function useData() {
       onGetTask({ userId }).then((response) => {
         console.log("data fetched: ", response);
       });
-
-    console.log("USE EFFECT"); //TODO: Remove
   }, [loading, error]);
 
   const states = {
@@ -162,6 +177,7 @@ function useData() {
     onEditTask,
     onDeleteTask,
     onCreateStep,
+    onEditStep,
     onDeleteStep,
   };
 

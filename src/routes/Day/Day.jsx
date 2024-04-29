@@ -29,28 +29,28 @@ function Day() {
       <EditTasks
         tasks={tasks}
         loading={loading}
+        onCreate={onCreateTask}
         onLoading={() => <Loader />}
-        createTask={({ userId, body }) => onCreateTask({ userId, body })}
       >
-        {(data) => <Task data={data} role="edit" />}
+        {(data) => (
+          <Task
+            data={data}
+            role="edit"
+            onDelete={onDeleteTask}
+            onEdit={onEditTask}
+          />
+        )}
       </EditTasks>
 
       <EditSteps tasks={tasks} loading={loading} onLoading={() => <Loader />}>
         {(data) => (
-          <Task
-            data={data}
-            role="container"
-            createStep={({ taskId, body }) =>
-              onCreateStep({ taskId: taskId, body: body })
-            }
-            onLoading={() => <Loader />}
-          >
+          <Task data={data} role="container" createStep={onCreateStep}>
             {(data) => (
               <Step
                 data={data}
                 role="edit"
-                onDelete={({ stepId }) => onDeleteStep({ stepId })}
-                onEdit={({ stepId, body }) => onEditStep({ stepId, body })}
+                onDelete={onDeleteStep}
+                onEdit={onEditStep}
               />
             )}
           </Task>

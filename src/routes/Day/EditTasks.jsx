@@ -4,23 +4,23 @@ import { IoMdAddCircle } from "react-icons/io";
 import { render } from "@testing-library/react";
 
 function EditTasks(props) {
-  const [newTaskContent, setNewTaskContent] = useState();
+  const [content, setContent] = useState();
   const renderFunc = props.children || props.render;
+
+  const createTask = (e) => {
+    e.preventDefault();
+    props.onCreate({ body: { content } });
+  };
+
   return (
     <div className="container-glass orderTaskContainer">
       <h1>Edit Tasks</h1>
-      <form
-        className="create-task-form"
-        onSubmit={async (e) => {
-          e.preventDefault();
-          await props.onCreate({ content: newTaskContent });
-        }}
-      >
+      <form className="create-task-form" onSubmit={createTask}>
         <input
           className="create-task-form__content"
           type="text"
-          value={newTaskContent}
-          onChange={(e) => setNewTaskContent(e.target.value)}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
         />
         <button className="create-task-form__submit-btn" type="submit">
           <IoMdAddCircle className="create-task-form__submit-btn__icon" />

@@ -5,8 +5,6 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 import "./Task.scss";
 
 function Task(props) {
-  const [data, setData] = React.useState(props.data);
-  const [loading, setLoading] = React.useState(false);
   const [content, setContent] = React.useState("");
   const [showForm, setShowForm] = React.useState(false);
 
@@ -16,7 +14,7 @@ function Task(props) {
       .createStep({
         taskId: props.data.id,
         body: {
-          content: content,
+          content,
         },
       })
       .then(() => {
@@ -24,10 +22,10 @@ function Task(props) {
       });
   };
 
-  const deleteStep = (e) => {
+  const deleteTask = (e) => {
     e.preventDefault();
-    props.deleteStep({
-      stepId: props.data.id,
+    props.onDelete({
+      taskId: props.data.id,
     });
   };
 
@@ -50,7 +48,7 @@ function Task(props) {
             />
             <RiDeleteBin5Fill
               className="edit-task__options__icon"
-              onClick={deleteStep}
+              onClick={deleteTask}
             />
           </div>
         </section>

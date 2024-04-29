@@ -64,7 +64,7 @@ function useData() {
       });
     }
   };
-  const onCreateTask = async ({ userId, body }) => {
+  const onCreateTask = async ({ body }) => {
     try {
       await createTask({ userId: userId, body: body }).then(() => {
         dispatch({
@@ -160,10 +160,7 @@ function useData() {
           payload: false,
         })
       );
-    loading &&
-      onGetTask({ userId }).then((response) => {
-        console.log("data fetched: ", response);
-      });
+    loading && onGetTask({ userId });
   }, [loading, error]);
 
   const states = {

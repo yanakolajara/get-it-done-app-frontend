@@ -1,17 +1,15 @@
-const sortTaskList = async (taskList) => {
-  if (!taskList.length) {
+const sortTasks = async (data) => {
+  if (!data.length) {
     return [];
   }
-  let curr = taskList.find((task) => task.previews_task_id === null);
-  if (!curr) {
-    return [];
+  let currentTask = data.find((task) => task.previews_task_id === null);
+  let sortedTasks = [];
+  while (currentTask.next_task_id !== null) {
+    sortedTasks.push(currentTask);
+    currentTask =
+      data.find((task) => task.id === currentTask.next_task_id) || null;
   }
-  let sorted = [curr];
-  while (curr.next_task_id !== null) {
-    curr = taskList.find((task) => task.id === curr.next_task_id) || null;
-    sorted.push(curr);
-  }
-  return sorted;
+  return sortedTasks;
 };
 
 const sortSteps = async (listOfSteps) => {
@@ -31,4 +29,4 @@ const sortSteps = async (listOfSteps) => {
   return sorted;
 };
 
-export { sortTaskList, sortSteps };
+export { sortTasks, sortSteps };

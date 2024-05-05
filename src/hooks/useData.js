@@ -1,5 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
+// import useAuth from "./useAuth";
+import { sortTaskList, sortTasks } from "../utils/sortData";
+import { useAuth } from "./useAuth";
 import {
   getTasks,
   createTask,
@@ -10,160 +13,87 @@ import {
   deleteStep,
   editStep,
 } from "../api/api";
-// import useAuth from "./useAuth";
-import { sortTaskList } from "../utils/sortData";
-import { useAuth } from "./useAuth";
 
 function useData() {
   const { userId } = useAuth();
 
-  const actionTypes = {
-    render: "RENDER",
-    error: "ERROR",
-    success: "SUCCESS",
-    // reset: "RESET",
-  };
-  const reducerObject = (state, payload) => ({
-    [actionTypes.render]: { ...state, loading: false, data: payload },
-    [actionTypes.success]: { ...state, loading: true },
-    [actionTypes.error]: { ...state, error: payload },
-  });
-  const reducer = (state, action) => {
-    return reducerObject(state, action.payload)[action.type] || state;
-  };
-  const initialState = {
-    data: [],
-    loading: true,
-  };
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [data, setData] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
 
-  const { data, loading, error } = state;
-
-  const onGetTask = async ({ userId }) => {
+  const onGetTask = async () => {
     try {
       const tasks = await getTasks(userId);
       const tasksWithSteps = await Promise.all(
         tasks.map(async (task) => {
-          const steps = await getSteps({ taskId: task.id }).then((response) => {
-            return response;
-          });
+          const steps = await getSteps({ taskId: task.id });
           return {
             ...task,
-            steps: steps,
+            steps,
           };
         })
       );
-      console.log(tasksWithSteps);
-      dispatch({
-        type: actionTypes.render,
-        payload: tasksWithSteps,
-      });
+      setData(tasksWithSteps);
+      setLoading(false);
     } catch (error) {
-      dispatch({
-        type: actionTypes.error,
-        payload: error,
-      });
+      return error;
     }
   };
+
   const onCreateTask = async ({ body }) => {
-    console.log({ userId: userId, body: body });
     try {
-      await createTask({ userId: userId, body: body }).then(() => {
-        dispatch({
-          type: actionTypes.success,
-        });
-      });
+      await createTask({ userId, body });
+      setLoading(true);
     } catch (error) {
-      dispatch({
-        type: actionTypes.error,
-        payload: error,
-      });
+      return error;
     }
   };
   const onEditTask = async ({ taskId, body }) => {
     try {
-      await editTask({ taskId: taskId, body: body }).then(() =>
-        dispatch({
-          type: actionTypes.success,
-        })
-      );
+      await editTask({ taskId, body });
+      setLoading(true);
     } catch (error) {
-      dispatch({
-        type: actionTypes.error,
-        payload: error,
-      });
+      return error;
     }
   };
   const onDeleteTask = async ({ taskId }) => {
     try {
-      await deleteTask({ taskId }).then(() =>
-        dispatch({
-          type: actionTypes.success,
-        })
-      );
+      await deleteTask({ taskId });
+      setLoading(true);
     } catch (error) {
-      dispatch({
-        type: actionTypes.error,
-        payload: error,
-      });
+      return error;
     }
   };
 
   const onCreateStep = async ({ taskId, body }) => {
     try {
-      await createStep({ taskId: taskId, body: body }).then(() =>
-        dispatch({
-          type: actionTypes.success,
-        })
-      );
+      await createStep({ taskId, body });
+      setLoading(true);
     } catch (error) {
-      dispatch({
-        type: actionTypes.error,
-        payload: error,
-      });
+      return error;
     }
   };
 
   const onEditStep = async ({ stepId, body }) => {
     try {
-      await editStep({ stepId: stepId, body: body }).then((response) =>
-        dispatch({
-          type: actionTypes.success,
-        })
-      );
+      await editStep({ stepId, body });
+      setLoading(true);
     } catch (error) {
-      dispatch({
-        type: actionTypes.error,
-        payload: error,
-      });
+      return error;
     }
   };
 
   const onDeleteStep = async ({ stepId }) => {
     try {
-      await deleteStep({ stepId: stepId }).then((response) =>
-        dispatch({
-          type: actionTypes.success,
-        })
-      );
+      await deleteStep({ stepId });
+      setLoading(true);
     } catch (error) {
-      dispatch({
-        type: actionTypes.error,
-        payload: error,
-      });
+      return error;
     }
   };
 
   React.useEffect(() => {
-    error &&
-      console.error({ error: error.message }).then(() =>
-        dispatch({
-          type: actionTypes.error,
-          payload: false,
-        })
-      );
-    loading && onGetTask({ userId });
-  }, [loading, error]);
+    loading && onGetTask();
+  }, [loading]);
 
   const states = {
     data,

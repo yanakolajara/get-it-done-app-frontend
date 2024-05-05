@@ -9,18 +9,17 @@ function Task(props) {
   const [showForm, setShowForm] = React.useState(false);
 
   const handleSubmit = (e) => {
-    console.log(e);
-    // e.preventDefault();
-    // props
-    //   .createStep({
-    //     taskId: props.data.id,
-    //     body: {
-    //       content,
-    //     },
-    //   })
-    //   .then(() => {
-    //     setContent("");
-    //   });
+    e.preventDefault();
+    props
+      .createStep({
+        taskId: props.data.id,
+        body: {
+          content,
+        },
+      })
+      .then(() => {
+        setContent("");
+      });
   };
 
   const deleteTask = (e) => {
@@ -33,6 +32,7 @@ function Task(props) {
   if (props.loading) {
     return props.onLoading();
   }
+  console.log(props);
 
   switch (props.role) {
     case "static":

@@ -56,31 +56,7 @@ function Day() {
           </Task>
         )}
       </EditSteps>
-      {/* <List tasks={tasks} loading={loading} onLoading={() => <Loader />}>
-        {(taskObj) => (
-          <ListTask
-            taskObj={taskObj}
-            loading={loading}
-            onLoading={() => <Loader />}
-            newStepForm={() => (
-              <NewStepForm
-                taskId={taskObj.id}
-                handleAddStep={(taskId, body) => onCreateStep(taskId, body)}
-              />
-            )}
-          >
-            {taskObj.childTasks.map((stepObj) => (
-              <Step
-                stepObj={stepObj}
-                onDelete={(step_id) => onDelete(step_id)}
-                onComplete={(step_id, body) => onEdit(step_id, body)}
-              >
 
-              </Step>
-            ))}
-          </ListTask>
-        )}
-      </List> */}
       <button onClick={() => navigate("/day/start")}>Create</button>
     </div>
   );

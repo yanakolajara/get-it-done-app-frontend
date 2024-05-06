@@ -5,8 +5,8 @@ import Loader from "../../components/Loader/Loader";
 import { EditTasks } from "./EditTasks";
 import { EditSteps } from "./EditSteps";
 
-import ListTask from "../../components/Task/TaskContainer";
-import EditStepForm from "./EditStepsContainer/EditStepForm";
+import ListTask from "../../components/Task/components/TaskContainer";
+// import EditStepForm from "../../components/Task/components/EditStepsContainer/EditStepForm";
 // import NewStepForm from "../../components/Task/CreateStepForm";
 import { Task } from "../../components/Task/Task";
 import { Step } from "../../components/Step/Step";

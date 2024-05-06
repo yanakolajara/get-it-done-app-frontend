@@ -3,6 +3,7 @@ import { MdDragIndicator } from "react-icons/md";
 import { TiEdit } from "react-icons/ti";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import "./Task.scss";
+import { completedStepsCount } from "../../utils/completedStepsCount";
 
 function Task(props) {
   const [content, setContent] = React.useState("");
@@ -32,8 +33,8 @@ function Task(props) {
   if (props.loading) {
     return props.onLoading();
   }
-  console.log(props);
 
+  console.log("task props", props);
   switch (props.role) {
     case "static":
       return (
@@ -76,6 +77,20 @@ function Task(props) {
             <p>0/{props.data.steps.length}</p>
           </footer>
         </article>
+      );
+    case "start":
+      return (
+        <section className="start-task">
+          <header>
+            <p>{props.data.content}</p>
+          </header>
+          <article>{props.data.steps.map(props.children)}</article>
+          <footer>
+            <p>
+              <p>0/{props.data.steps.length}</p>
+            </p>
+          </footer>
+        </section>
       );
     default:
       return null;

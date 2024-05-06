@@ -1,5 +1,7 @@
+import { Step } from "../../components/Step/Step";
 import { Task } from "../../components/Task/Task";
 import { useData } from "../../hooks/useData";
+import { processStepCompletion } from "../../utils/processStepCompletion";
 import "./Start.scss";
 import { useNavigate } from "react-router-dom";
 
@@ -18,11 +20,13 @@ function Start() {
   const navigate = useNavigate();
   return (
     <main className="Start">
-      <section className="Start__container container-glass">
+      <div className="Start__container container-glass">
         {data.map((task) => (
-          <Task data={task} role="start" />
+          <Task data={task} role="start">
+            {(data) => <Step data={data} role="start" onEdit={onEditStep} />}
+          </Task>
         ))}
-      </section>
+      </div>
       <button onClick={() => navigate("/day")}>Back to Edit</button>
     </main>
   );

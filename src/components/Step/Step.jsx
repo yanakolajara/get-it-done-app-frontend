@@ -21,6 +21,7 @@ function Step(props) {
     });
   };
 
+  console.log("props here", props);
   // this.state.loading && <Loader />;
   switch (props.role) {
     case "static":
@@ -33,6 +34,14 @@ function Step(props) {
             </button>
             <button onClick={switchStatus}>✅</button> */}
           </div>
+        </article>
+      );
+
+    case "start":
+      return (
+        <article className="static-step">
+          <p className="static-step__content">{props.data.content}</p>
+          <button onClick={switchStatus}>Complete</button>
         </article>
       );
     default:

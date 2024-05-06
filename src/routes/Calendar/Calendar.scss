@@ -1,0 +1,26 @@
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100vh;
+
+  .tasks {
+    flex-direction: column;
+    height: 30%;
+    width: 80%;
+    padding: 6px;
+    border-radius: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
+  }
+  .week {
+    width: 95%;
+    height: 50%;
+    text-shadow: 0px 0px 5px rgba($color: rgb(255, 255, 255), $alpha: 0.9) inset;
+    background-color: rgba($color: rgb(214, 214, 214), $alpha: 0.3);
+    border-radius: 1rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2),
+      0px 0px 3px rgba(rgb(216, 216, 216), 0.8) inset;
+  }
+}

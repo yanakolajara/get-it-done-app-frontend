@@ -6,9 +6,9 @@ import "./Start.scss";
 import { useNavigate } from "react-router-dom";
 
 function Start() {
-  const { states, updaters } = useData();
-  const { data, loading } = states;
   const {
+    data,
+    loading,
     onGetTask,
     onCreateTask,
     onEditTask,
@@ -16,7 +16,7 @@ function Start() {
     onCreateStep,
     onEditStep,
     onDeleteStep,
-  } = updaters;
+  } = useData();
   const navigate = useNavigate();
   return (
     <main className="Start">

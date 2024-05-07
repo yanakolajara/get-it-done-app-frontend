@@ -12,9 +12,10 @@ import { Task } from "../../components/Task/Task";
 import { Step } from "../../components/Step/Step";
 function Day() {
   const navigate = useNavigate();
-  const { states, updaters } = useData();
-  const { data: tasks, loading } = states;
+
   const {
+    data: tasks,
+    loading,
     onGetTask,
     onCreateTask,
     onEditTask,
@@ -22,7 +23,7 @@ function Day() {
     onCreateStep,
     onEditStep,
     onDeleteStep,
-  } = updaters;
+  } = useData();
 
   return (
     <div className="day">

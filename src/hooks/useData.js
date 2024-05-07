@@ -95,12 +95,9 @@ function useData() {
     loading && onGetTask();
   }, [loading]);
 
-  const states = {
+  return {
     data,
     loading,
-  };
-
-  const updaters = {
     onGetTask,
     onCreateTask,
     onEditTask,
@@ -108,11 +105,6 @@ function useData() {
     onCreateStep,
     onEditStep,
     onDeleteStep,
-  };
-
-  return {
-    states,
-    updaters,
   };
 }
 

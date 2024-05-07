@@ -9,6 +9,15 @@ const getTasks = async (userId) => {
   }
 };
 
+const getScheduledTasks = async (userId) => {
+  try {
+    const response = await Axios.get(`/tasks/${userId}`);
+    return response.data.message ? [] : response.data;
+  } catch (error) {
+    return [];
+  }
+};
+
 const createTask = async ({ userId, body }) => {
   try {
     const response = await Axios.post(`/tasks/${userId}`, body);

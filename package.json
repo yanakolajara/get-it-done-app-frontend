@@ -20,6 +20,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:e2e": "jest --config ./e2e/jest-e2e.json --forceExit",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -41,6 +42,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21",
+    "supertest": "^7.0.0"
   }
 }

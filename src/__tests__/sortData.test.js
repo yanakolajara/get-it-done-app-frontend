@@ -1,4 +1,4 @@
-import { sortTasks, sortSteps } from "../../utils/sortData";
+import { sortTasks, sortSteps } from "../utils/sortData";
 
 jest.mock("axios");
 

@@ -1,10 +1,10 @@
 import "./EditTasks.scss";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { IoMdAddCircle } from "react-icons/io";
-import { render } from "@testing-library/react";
+// import { render } from "@testing-library/react";
 
 function EditTasks(props) {
-  const [content, setContent] = useState();
+  const [content, setContent] = React.useState();
   const renderFunc = props.children || props.render;
 
   const createTask = (e) => {

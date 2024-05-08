@@ -5,7 +5,7 @@ import Loader from "../../components/Loader/Loader";
 import { EditTasks } from "./EditTasks";
 import { EditSteps } from "./EditSteps";
 
-import ListTask from "../../components/Task/components/TaskContainer";
+// import ListTask from "../../components/Task/components/TaskContainer";
 // import EditStepForm from "../../components/Task/components/EditStepsContainer/EditStepForm";
 // import NewStepForm from "../../components/Task/CreateStepForm";
 import { Task } from "../../components/Task/Task";
@@ -16,13 +16,13 @@ function Day() {
   const {
     data: tasks,
     loading,
-    onGetTask,
     onCreateTask,
     onEditTask,
     onDeleteTask,
     onCreateStep,
     onEditStep,
     onDeleteStep,
+    // onGetTask,
   } = useData();
 
   return (

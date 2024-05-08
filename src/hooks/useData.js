@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 // import useAuth from "./useAuth";
-import { sortTaskList, sortTasks } from "../utils/sortData";
 import { useAuth } from "./useAuth";
 import {
   getTasks,
@@ -23,6 +22,7 @@ function useData() {
   const onGetTask = async () => {
     try {
       const tasks = await getTasks(userId);
+      console.log("tasks", tasks);
       const tasksWithSteps = await Promise.all(
         tasks.map(async (task) => {
           const steps = await getSteps({ taskId: task.id });

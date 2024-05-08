@@ -5,15 +5,25 @@ main {
   align-items: center;
   height: 100vh;
 
-  .tasks {
-    flex-direction: column;
+  .top-container {
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+    width: 90%;
     height: 30%;
-    width: 80%;
-    padding: 6px;
-    border-radius: 1rem;
-    background: rgba(0, 0, 0, 0.2);
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
+    align-items: center;
+    article {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      gap: 8px;
+      height: 100%;
+      padding: 6px;
+      border-radius: 0.5rem;
+      background: rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
+    }
   }
+
   .week {
     width: 95%;
     height: 50%;

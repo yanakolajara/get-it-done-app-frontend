@@ -1,21 +1,21 @@
 import { Step } from "../../components/Step/Step";
 import { Task } from "../../components/Task/Task";
 import { useData } from "../../hooks/useData";
-import { processStepCompletion } from "../../utils/processStepCompletion";
 import "./Start.scss";
 import { useNavigate } from "react-router-dom";
+// import { processStepCompletion } from "../../utils/processStepCompletion";
 
 function Start() {
   const {
+    // loading,
+    // onGetTask,
+    // onCreateTask,
+    // onEditTask,
+    // onDeleteTask,
+    // onCreateStep,
+    // onDeleteStep,
     data,
-    loading,
-    onGetTask,
-    onCreateTask,
-    onEditTask,
-    onDeleteTask,
-    onCreateStep,
     onEditStep,
-    onDeleteStep,
   } = useData();
   const navigate = useNavigate();
   return (

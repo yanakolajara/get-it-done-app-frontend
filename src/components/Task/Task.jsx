@@ -1,47 +1,54 @@
 import React from "react";
 import { MdDragIndicator } from "react-icons/md";
-import { TiEdit } from "react-icons/ti";
-import { RiDeleteBin5Fill } from "react-icons/ri";
 import "./Task.scss";
-import { completedStepsCount } from "../../utils/completedStepsCount";
+// import { TiEdit } from "react-icons/ti";
+// import { RiDeleteBin5Fill } from "react-icons/ri";
+// import { completedStepsCount } from "../../utils/completedStepsCount";
 
 function Task(props) {
   const [content, setContent] = React.useState("");
   const [showForm, setShowForm] = React.useState(false);
+  const {
+    // onEdit,
+    data,
+    role,
+    onDelete,
+    onLoading,
+    createStep,
+    loading,
+    children,
+  } = props;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props
-      .createStep({
-        taskId: props.data.id,
-        body: {
-          content,
-        },
-      })
-      .then(() => {
-        setContent("");
-      });
+    createStep({
+      taskId: data.id,
+      body: {
+        content,
+      },
+    }).then(() => {
+      setContent("");
+    });
   };
 
   const deleteTask = (e) => {
     e.preventDefault();
-    props.onDelete({
-      taskId: props.data.id,
+    onDelete({
+      taskId: data.id,
     });
   };
 
-  if (props.loading) {
-    return props.onLoading();
+  if (loading) {
+    return onLoading();
   }
 
-  console.log("task props", props);
-  switch (props.role) {
+  switch (role) {
     case "static":
       return (
         <section className="static-task">
           <MdDragIndicator className="static-task__drag-icon" />
 
-          <p className="static-task__content">{props.data.content}</p>
+          <p className="static-task__content">{data.content}</p>
           <div>
             <button
               className="btn task-static"
@@ -62,7 +69,7 @@ function Task(props) {
       return (
         <article className="container-task">
           <header>
-            <p>{props.data.content}</p>
+            <p>{data.content}</p>
             <form onSubmit={(e) => handleSubmit(e)}>
               <input
                 type="text"
@@ -72,9 +79,9 @@ function Task(props) {
               <input type="submit" value="Add Step" />
             </form>
           </header>
-          <section>{props.data.steps.map(props.children)}</section>
+          <section>{data.steps.map(children)}</section>
           <footer>
-            <p>0/{props.data.steps.length}</p>
+            <p>0/{data.steps.length}</p>
           </footer>
         </article>
       );
@@ -82,14 +89,32 @@ function Task(props) {
       return (
         <section className="start-task">
           <header>
-            <p>{props.data.content}</p>
+            <p>{data.content}</p>
           </header>
-          <article>{props.data.steps.map(props.children)}</article>
+          <article>{data.steps.map(children)}</article>
           <footer>
             <p>
-              <p>0/{props.data.steps.length}</p>
+              <p>0/{data.steps.length}</p>
             </p>
           </footer>
+        </section>
+      );
+    case "calendar":
+      return (
+        <section className="calendar-task">
+          <p>{data.content}</p>
+          <button
+            className="btn task-calendar"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowForm(!showForm);
+            }}
+          >
+            Edit
+          </button>
+          <button className="btn calendar-del" onClick={deleteTask}>
+            Delete
+          </button>
         </section>
       );
     default:

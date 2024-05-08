@@ -3,12 +3,12 @@ import React from "react";
 // import { TiEdit } from "react-icons/ti";
 // import { RiDeleteBin5Fill } from "react-icons/ri";
 import "./Step.scss";
-import Loader from "../Loader/Loader";
+// import Loader from "../Loader/Loader";
 
 function Step(props) {
-  const [showForm, setShowForm] = React.useState(false);
-  const [content, setContent] = React.useState("");
-  const [loading, setLoading] = React.useState(false);
+  // const [showForm, setShowForm] = React.useState(false);
+  // const [content, setContent] = React.useState("");
+  // const [loading, setLoading] = React.useState(false);
 
   const switchStatus = (e) => {
     e.preventDefault();

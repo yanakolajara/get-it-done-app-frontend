@@ -20,7 +20,19 @@ function Calendar() {
         </article>
         <PiArrowCircleRightDuotone />
       </div>
-      <article className="week"></article>
+      <div className="bottom-container">
+        <PiArrowCircleLeftDuotone />
+        <article className="week">
+          <p>mon</p>
+          <p>tue</p>
+          <p>wed</p>
+          <p>thu</p>
+          <p>fri</p>
+          <p>sat</p>
+          <p>sun</p>
+        </article>
+        <PiArrowCircleRightDuotone />
+      </div>
     </main>
   );
 }

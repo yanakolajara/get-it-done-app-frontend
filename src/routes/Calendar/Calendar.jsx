@@ -6,12 +6,11 @@ import {
   PiArrowCircleRightDuotone,
 } from "react-icons/pi";
 import { CalendarDay } from "../../components/CalendarDay/CalendarDay";
-import { currentWeek } from "../../utils/DateUtils";
+import { getWeek } from "../../utils/DateUtils";
 import "./Calendar.scss";
 
 function Calendar() {
   const { data } = useData();
-  console.log("today", currentWeek());
   return (
     <main className="calendar">
       <div className="top-container">

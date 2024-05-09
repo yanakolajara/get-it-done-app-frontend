@@ -5,12 +5,14 @@ import {
   PiArrowCircleLeftDuotone,
   PiArrowCircleRightDuotone,
 } from "react-icons/pi";
-import { CalendarDay } from "../../components/CalendarDay/CalendarDay";
-import { getWeek } from "../../utils/DateUtils";
+// import { CalendarDay } from "../../components/CalendarDay/CalendarDay";
+// import { getWeek } from "../../utils/DateUtils";
 import "./Calendar.scss";
+import { CalendarDays } from "./components/CalendarDays";
 
 function Calendar() {
   const { data } = useData();
+
   return (
     <main className="calendar">
       <div className="top-container">
@@ -22,17 +24,10 @@ function Calendar() {
         </article>
         <PiArrowCircleRightDuotone />
       </div>
-      <div className="bottom-container">
-        <PiArrowCircleLeftDuotone />
-        <article className="week">
-          <CalendarDay />
-          <CalendarDay />
-          <CalendarDay />
-          <CalendarDay />
-          <CalendarDay />
-        </article>
-        <PiArrowCircleRightDuotone />
-      </div>
+      <CalendarDays
+        leftArrow={<PiArrowCircleLeftDuotone />}
+        rightArrow={<PiArrowCircleRightDuotone />}
+      ></CalendarDays>
     </main>
   );
 }

@@ -1,17 +1,18 @@
 import React from "react";
 import { Task } from "../../components/Task/Task";
 import { useData } from "../../hooks/useData";
+import { CalendarDay } from "../../components/CalendarDay/CalendarDay";
+import { useCalendar } from "../../hooks/useCalendar";
+import "./Calendar.scss";
+import { CalendarDays } from "./components/CalendarDays";
 import {
   PiArrowCircleLeftDuotone,
   PiArrowCircleRightDuotone,
 } from "react-icons/pi";
-// import { CalendarDay } from "../../components/CalendarDay/CalendarDay";
-// import { getWeek } from "../../utils/DateUtils";
-import "./Calendar.scss";
-import { CalendarDays } from "./components/CalendarDays";
 
 function Calendar() {
   const { data } = useData();
+  const { today, week, updateWeek } = useCalendar();
 
   return (
     <main className="calendar">
@@ -27,7 +28,10 @@ function Calendar() {
       <CalendarDays
         leftArrow={<PiArrowCircleLeftDuotone />}
         rightArrow={<PiArrowCircleRightDuotone />}
-      ></CalendarDays>
+        weekTarget={week}
+      >
+        {(data) => <CalendarDay data={data} />}
+      </CalendarDays>
     </main>
   );
 }

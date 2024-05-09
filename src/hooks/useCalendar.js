@@ -4,7 +4,7 @@ function useCalendar() {
   const [today, setToday] = React.useState(getDay());
   const [week, setWeek] = React.useState(getWeek());
 
-  const updateWeek = (gap: number) => setWeek(getWeek(gap));
+  const updateWeek = (gap) => setWeek(getWeek(gap));
 
   return {
     today,

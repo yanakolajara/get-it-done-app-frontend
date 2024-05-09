@@ -20,8 +20,9 @@ const dateToObject = (date) => {
   return {
     year: date.getFullYear(),
     month: date.getMonth(),
+    monthName: date.toLocaleString("default", { month: "long" }),
     day: date.getDate(),
-    dayOfWeek: date.getDay(),
+    dayName: date.getDay(),
   };
 };
 

@@ -1,18 +1,38 @@
-import { getWeek } from "../utils/DateUtils";
+import { getDay, getWeek, dateToObject } from "../utils/DateUtils";
 
-describe("utils file tests", () => {
-  test("getWeek() -> return an Array", () => {
-    const result = getWeek();
-    const expected = Array;
+describe("Testing getDay()", () => {
+  it("should return an Object", () => {
+    const result = getDay();
+    const expected = Object;
     expect(result).toBeInstanceOf(expected);
   });
-  test("getWeek() -> return current week", () => {
+  it("should return today", () => {
+    const date = new Date();
+    const result = getDay(0);
+    const expected = date.getDate();
+    expect(result.day).toEqual(expected);
+  });
+  it("should return 8 days from today", () => {
+    const date = new Date();
+    date.setDate(date.getDate() + 8);
+    const result = getDay(8);
+    const expected = date.getDate();
+    expect(result.day).toEqual(expected);
+  });
+});
+describe("Testing getWeek()", () => {
+  it("should return an Object", () => {
+    const result = getDay();
+    const expected = Object;
+    expect(result).toBeInstanceOf(expected);
+  });
+  it("should return this week", () => {
     const result = getWeek();
     const dayNumbers = result.map((date) => date.dayOfWeek);
     const expected = [1, 2, 3, 4, 5, 6, 0];
     expect(dayNumbers).toEqual(expected);
   });
-  test("getWeek() -> return 2 week from current week", () => {
+  it("should return 2 weeks from this week", () => {
     let weekGap = 2;
     let weekTarget = new Date();
     weekTarget.setDate(weekTarget.getDate() + weekGap * 7);

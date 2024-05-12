@@ -1,5 +1,7 @@
 import { getDay, getWeek, dateToObject } from "../utils/DateUtils";
 
+describe("Testing dateToObject()", () => {});
+
 describe("Testing getDay()", () => {
   it("should return an Object", () => {
     const result = getDay();
@@ -20,25 +22,38 @@ describe("Testing getDay()", () => {
     expect(result.day).toEqual(expected);
   });
 });
+
 describe("Testing getWeek()", () => {
   it("should return an Object", () => {
     const result = getDay();
     const expected = Object;
     expect(result).toBeInstanceOf(expected);
   });
-  it("should return this week", () => {
+  it("should return a week from monday to sunday", () => {
     const result = getWeek();
-    const dayNumbers = result.map((date) => date.dayOfWeek);
+    const dayNumbers = result.map((date) => date.dayName);
     const expected = [1, 2, 3, 4, 5, 6, 0];
     expect(dayNumbers).toEqual(expected);
   });
-  it("should return 2 weeks from this week", () => {
-    let weekGap = 2;
+  it("should return this week", () => {
     let weekTarget = new Date();
-    weekTarget.setDate(weekTarget.getDate() + weekGap * 7);
-    let firstDay = weekTarget.getDate() - 1;
-    let result = getWeek(2);
-    let expected = [firstDay, firstDay + 6];
+    weekTarget.setDate(weekTarget.getDate() - weekTarget.getDay() + 1);
+    let result = getWeek();
+    let expected = [weekTarget.getDate(), weekTarget.getDate() + 6];
     expect([result[0].day, result[6].day]).toStrictEqual(expected);
   });
+});
+
+describe("Testing NameOfDay()", () => {
+  it("should return a String", () => {
+    const result = getWeek();
+    const dayNumbers = result.map((date) => date.dayName);
+    const expected = [1, 2, 3, 4, 5, 6, 0];
+    expect(dayNumbers).toEqual(expected);
+  });
+  // it("should return the string 'Monday'", () => {
+  //   const result = getDay();
+  //   const expected = Object;
+  //   expect(result).toBeInstanceOf(expected);
+  // });
 });

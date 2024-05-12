@@ -1,0 +1,13 @@
+.bottom-container {
+  align-items: center;
+  width: 95%;
+  height: 50%;
+}
+
+.week-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+}

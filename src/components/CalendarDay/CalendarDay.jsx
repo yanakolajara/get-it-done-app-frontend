@@ -1,20 +1,18 @@
 import React from "react";
 import "./CalendarDay.scss";
+import { getNameOfDay } from "../../utils/DateUtils";
 
 function CalendarDay(props) {
   const { data } = props;
+  const { monthName, dayName, day } = data;
   return (
     <section className="calendar-day">
-      <p>{data.dayName}</p>
-      <p>
-        {data.monthName} {data.day}
-      </p>
-      <div>
-        <p className="task4"></p>
-        <p className="task5"></p>
-        <p className="task6"></p>
-        <p className="task7"></p>
-      </div>
+      <header>
+        <h2>{getNameOfDay(dayName)}</h2>
+        <p>
+          ({monthName} {day})
+        </p>
+      </header>
     </section>
   );
 }

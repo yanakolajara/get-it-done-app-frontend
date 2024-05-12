@@ -1,8 +1,11 @@
+import React from "react";
+import "./CalendarDays.scss";
+
 function CalendarDays(props) {
   const renderFunc = props.children || props.render;
   return (
     <article className="bottom-container">
-      <article className="week">{props.weekTarget.map(renderFunc)}</article>
+      <div className="week-container">{props.weekTarget.map(renderFunc)}</div>
     </article>
   );
 }

@@ -1,18 +1,15 @@
-import "./Day.scss";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useData } from "../../hooks/useData";
 import Loader from "../../components/Loader/Loader";
 import { EditTasks } from "./EditTasks";
 import { EditSteps } from "./EditSteps";
-// import ListTask from "../../components/Task/components/TaskContainer";
-// import EditStepForm from "../../components/Task/components/EditStepsContainer/EditStepForm";
-// import NewStepForm from "../../components/Task/CreateStepForm";
 import { Task } from "../../components/Task/Task";
 import { Step } from "../../components/Step/Step";
-function Day(params) {
+
+function Day() {
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { state } = useLocation();
-  const { year, month, monthName, day, dayName } = state.date;
+  console.log(searchParams.get("date"));
   const {
     data: tasks,
     loading,
@@ -62,5 +59,3 @@ function Day(params) {
     </div>
   );
 }
-
-export { Day };

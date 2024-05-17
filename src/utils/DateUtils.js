@@ -1,7 +1,7 @@
 const dateToObject = (date) => {
   return {
     year: date.getFullYear(),
-    month: date.getMonth(),
+    month: date.getMonth() + 1,
     monthName: date.toLocaleString("default", { month: "long" }),
     day: date.getDate(),
     dayName: date.getDay(),
@@ -23,7 +23,6 @@ const getWeek = (gap = 0) => {
     weekArr.push(dateToObject(date));
     date.setDate(date.getDate() + 1);
   }
-  console.log(weekArr);
   return weekArr;
 };
 

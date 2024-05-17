@@ -21,7 +21,6 @@ function Step(props) {
     });
   };
 
-  console.log("props here", props);
   // this.state.loading && <Loader />;
   switch (props.role) {
     case "static":

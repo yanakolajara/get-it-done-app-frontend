@@ -11,7 +11,7 @@ export default function AppUI() {
     <div className="AppUI">
       <Routes>
         {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/day" element={<Day />} />
+        <Route path="/day/:date" element={<Day />} />
         <Route path="/day/start" element={<Start />} />
         <Route path="/calendar" element={<Calendar />} />
       </Routes>

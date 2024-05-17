@@ -1,11 +1,8 @@
 import Axios from "./axios";
 
 const getTasks = async (userId) => {
-  console.log("ghifds");
   try {
     const response = await Axios.get(`/tasks/${userId}`);
-    console.log("response", response);
-    console.log("res", response);
     return response.data.message ? [] : response.data;
   } catch (error) {
     console.log(error);

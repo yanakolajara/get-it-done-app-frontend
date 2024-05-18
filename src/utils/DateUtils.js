@@ -8,6 +8,12 @@ const dateToObject = (date) => {
   };
 };
 
+const dateObjToString = ({ year, month, day }) => {
+  let formattedMonth = month.toString().padStart(2, "0");
+  let formattedDay = day.toString().padStart(2, "0");
+  return `${year}-${formattedMonth}-${formattedDay}`;
+};
+
 const getDay = (gap = 0) => {
   let date = new Date();
   date.setDate(date.getDate() + gap);
@@ -39,4 +45,4 @@ const getNameOfDay = (dayNumber) => {
   return dayNames[dayNumber];
 };
 
-export { getWeek, dateToObject, getDay, getNameOfDay };
+export { dateToObject, dateObjToString, getWeek, getDay, getNameOfDay };

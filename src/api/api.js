@@ -1,4 +1,5 @@
 import Axios from "./axios";
+import { dateObjToString } from "../utils/DateUtils";
 
 const getTasks = async (userId) => {
   try {
@@ -10,14 +11,16 @@ const getTasks = async (userId) => {
   }
 };
 
-// const getScheduledTasks = async (userId) => {
-//   try {
-//     const response = await Axios.get(`/tasks/${userId}`);
-//     return response.data.message ? [] : response.data;
-//   } catch (error) {
-//     return [];
-//   }
-// };
+const getTasksOnDate = async ({ userId, date }) => {
+  try {
+    const response = await Axios.get(
+      `/tasks/${userId}/${dateObjToString(date)}`
+    );
+    return response.data.message ? [] : response.data;
+  } catch (error) {
+    return [];
+  }
+};
 
 const createTask = async ({ userId, body }) => {
   try {
@@ -86,6 +89,7 @@ const deleteStep = async ({ stepId }) => {
 
 export {
   getTasks,
+  getTasksOnDate,
   createTask,
   editTask,
   deleteTask,

@@ -1,6 +1,23 @@
-import { getDay, getWeek, dateToObject } from "../utils/DateUtils";
+import {
+  getDay,
+  getWeek,
+  dateToObject,
+  dateObjToString,
+} from "../utils/DateUtils";
 
 describe("Testing dateToObject()", () => {});
+describe("Testing dateObjToString()", () => {
+  it("should return a string", () => {
+    const dateObj = {
+      year: 2003,
+      month: 5,
+      day: 20,
+    };
+    const result = dateObjToString(dateObj);
+    const expected = "2003-05-20";
+    expect(result).toEqual(expected);
+  });
+});
 
 describe("Testing getDay()", () => {
   it("should return an Object", () => {

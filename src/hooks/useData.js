@@ -11,7 +11,9 @@ import {
   getSteps,
   deleteStep,
   editStep,
+  getTasksOnDate,
 } from "../api/api";
+import { dateObjToString, getDay } from "../utils/DateUtils";
 
 function useData() {
   const { userId } = useAuth();
@@ -19,9 +21,9 @@ function useData() {
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
-  const onGetTask = async () => {
+  const onGetTask = async (date = null) => {
     try {
-      const tasks = await getTasks(userId);
+      const tasks = await getTasks({ userId, date });
       const tasksWithSteps = await Promise.all(
         tasks.map(async (task) => {
           const steps = await getSteps({ taskId: task.id });
@@ -98,6 +100,7 @@ function useData() {
     data,
     loading,
     onGetTask,
+    // onGetTaskWithDate,
     onCreateTask,
     onEditTask,
     onDeleteTask,

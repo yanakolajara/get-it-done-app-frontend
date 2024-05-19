@@ -1,21 +1,17 @@
 import Axios from "./axios";
 import { dateObjToString } from "../utils/DateUtils";
 
-const getTasks = async (userId) => {
+// const getTasksOnDate = async ({ userId, date }) => {
+//   try {
+//     const response = await Axios.get(`/tasks/${userId}/${date}`);
+//     return response.data.message ? [] : response.data;
+//   } catch (error) {
+//     return [];
+//   }
+// };
+const getTasks = async ({ userId, date }) => {
   try {
-    const response = await Axios.get(`/tasks/${userId}`);
-    return response.data.message ? [] : response.data;
-  } catch (error) {
-    console.log(error);
-    return [];
-  }
-};
-
-const getTasksOnDate = async ({ userId, date }) => {
-  try {
-    const response = await Axios.get(
-      `/tasks/${userId}/${dateObjToString(date)}`
-    );
+    const response = await Axios.get(`/tasks/${userId}`, { date });
     return response.data.message ? [] : response.data;
   } catch (error) {
     return [];
@@ -89,7 +85,7 @@ const deleteStep = async ({ stepId }) => {
 
 export {
   getTasks,
-  getTasksOnDate,
+  // getTasksOnDate,
   createTask,
   editTask,
   deleteTask,

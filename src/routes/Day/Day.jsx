@@ -9,13 +9,14 @@ import { EditSteps } from "./EditSteps";
 // import NewStepForm from "../../components/Task/CreateStepForm";
 import { Task } from "../../components/Task/Task";
 import { Step } from "../../components/Step/Step";
-function Day(params) {
+function Day() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const { year, month, monthName, day, dayName } = state.date;
   const {
     data: tasks,
     loading,
+    // onGetTaskWithDate,
     onCreateTask,
     onEditTask,
     onDeleteTask,
@@ -25,8 +26,11 @@ function Day(params) {
     // onGetTask,
   } = useData();
 
+  // console.log(onGetTaskWithDate({ date: { year, month, day } }));
+
   return (
     <div className="day">
+      <button onClick={() => navigate("/calendar")}>Back</button>
       <EditTasks
         tasks={tasks}
         loading={loading}

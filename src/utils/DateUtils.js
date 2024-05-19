@@ -9,8 +9,8 @@ const dateToObject = (date) => {
 };
 
 const dateObjToString = ({ year, month, day }) => {
-  let formattedMonth = month.toString().padStart(2, "0");
-  let formattedDay = day.toString().padStart(2, "0");
+  let formattedMonth = String(month).padStart(2, "0");
+  let formattedDay = String(day).padStart(2, "0");
   return `${year}-${formattedMonth}-${formattedDay}`;
 };
 
@@ -23,8 +23,9 @@ const getDay = (gap = 0) => {
 const getWeek = (gap = 0) => {
   const weekArr = [];
   const date = new Date();
+  console.log(date.getDay());
   date.setDate(date.getDate() - gap * 7);
-  date.setDate(date.getDate() - date.getDay() + 1);
+  date.setDate(date.getDate() - (date.getDay() || 7) + 1);
   while (weekArr.length < 7) {
     weekArr.push(dateToObject(date));
     date.setDate(date.getDate() + 1);

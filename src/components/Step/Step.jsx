@@ -9,6 +9,7 @@ function Step(props) {
   // const [showForm, setShowForm] = React.useState(false);
   // const [content, setContent] = React.useState("");
   // const [loading, setLoading] = React.useState(false);
+  console.log(props);
 
   const switchStatus = (e) => {
     e.preventDefault();
@@ -16,7 +17,7 @@ function Step(props) {
       stepId: props.data.id,
       body: {
         ...props.data,
-        isCompleted: !props.data.completed,
+        completed: !props.data.completed,
       },
     });
   };
@@ -38,7 +39,9 @@ function Step(props) {
 
     case "start":
       return (
-        <article className="static-step">
+        <article
+          className={`static-step ${props.data.completed && "completed"}`}
+        >
           <p className="static-step__content">{props.data.content}</p>
           <button onClick={switchStatus}>Complete</button>
         </article>

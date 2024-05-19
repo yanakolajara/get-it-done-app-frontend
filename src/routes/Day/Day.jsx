@@ -1,6 +1,6 @@
 import "./Day.scss";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { useData } from "../../hooks/useData";
+import { useTasks } from "../../hooks/useTasks";
 import Loader from "../../components/Loader/Loader";
 import { EditTasks } from "./EditTasks";
 import { EditSteps } from "./EditSteps";
@@ -11,8 +11,6 @@ import { Task } from "../../components/Task/Task";
 import { Step } from "../../components/Step/Step";
 function Day() {
   const navigate = useNavigate();
-  const { state } = useLocation();
-  const { year, month, monthName, day, dayName } = state.date;
   const {
     data: tasks,
     loading,
@@ -24,9 +22,7 @@ function Day() {
     onEditStep,
     onDeleteStep,
     // onGetTask,
-  } = useData();
-
-  // console.log(onGetTaskWithDate({ date: { year, month, day } }));
+  } = useTasks();
 
   return (
     <div className="day">

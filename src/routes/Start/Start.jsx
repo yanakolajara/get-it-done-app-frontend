@@ -1,6 +1,6 @@
 import { Step } from "../../components/Step/Step";
 import { Task } from "../../components/Task/Task";
-import { useData } from "../../hooks/useData";
+import { useTasks } from "../../hooks/useTasks";
 import "./Start.scss";
 import { useNavigate } from "react-router-dom";
 // import { processStepCompletion } from "../../utils/processStepCompletion";
@@ -16,7 +16,7 @@ function Start() {
     // onDeleteStep,
     data,
     onEditStep,
-  } = useData();
+  } = useTasks();
   const navigate = useNavigate();
   return (
     <main className="Start">

@@ -1,6 +1,7 @@
 import React from "react";
+import { useTasks } from "../../hooks/useTasks";
 import { Task } from "../../components/Task/Task";
-import { useData } from "../../hooks/useData";
+
 import { CalendarDay } from "../../components/CalendarDay/CalendarDay";
 import { useCalendar } from "../../hooks/useCalendar";
 import "./Calendar.scss";
@@ -11,7 +12,7 @@ import {
 } from "react-icons/pi";
 
 function Calendar() {
-  const { data } = useData();
+  const { data } = useTasks();
   const { today, week, updateWeek } = useCalendar();
 
   return (

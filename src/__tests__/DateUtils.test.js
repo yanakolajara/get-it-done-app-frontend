@@ -54,7 +54,7 @@ describe("Testing getWeek()", () => {
   });
   it("should return this week", () => {
     let weekTarget = new Date();
-    weekTarget.setDate(weekTarget.getDate() - weekTarget.getDay() + 1);
+    weekTarget.setDate(weekTarget.getDate() - (weekTarget.getDay() || 7) + 1);
     let result = getWeek();
     let expected = [weekTarget.getDate(), weekTarget.getDate() + 6];
     expect([result[0].day, result[6].day]).toStrictEqual(expected);

@@ -1,6 +1,6 @@
 import React from "react";
 import "./CalendarDay.scss";
-import { getNameOfDay } from "../../utils/DateUtils";
+import { dateObjToString, getNameOfDay } from "../../utils/DateUtils";
 import { useNavigate } from "react-router-dom";
 import { PiDropSimpleThin } from "react-icons/pi";
 
@@ -12,9 +12,7 @@ function CalendarDay(props) {
   return (
     <section
       className="calendar-day"
-      onClick={(e) =>
-        navigate(`/day/${year}-${month}-${day}`, { state: { date: data } })
-      }
+      onClick={(e) => navigate(`/day/${dateObjToString({ year, month, day })}`)}
     >
       <header>
         <h2>{getNameOfDay(dayName)}</h2>

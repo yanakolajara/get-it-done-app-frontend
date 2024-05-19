@@ -14,10 +14,11 @@ import {
   getTasksOnDate,
 } from "../api/api";
 import { dateObjToString, getDay } from "../utils/DateUtils";
+import { useParams } from "react-router-dom";
 
-function useData() {
+function useTasks() {
+  const { date } = useParams();
   const { userId } = useAuth();
-
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
@@ -91,9 +92,8 @@ function useData() {
       return error;
     }
   };
-
   React.useEffect(() => {
-    loading && onGetTask();
+    loading && onGetTask(date);
   }, [loading]);
 
   return {
@@ -110,4 +110,4 @@ function useData() {
   };
 }
 
-export { useData };
+export { useTasks };

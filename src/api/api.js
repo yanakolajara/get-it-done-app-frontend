@@ -1,5 +1,4 @@
 import Axios from "./axios";
-import { dateObjToString } from "../utils/DateUtils";
 
 // const getTasksOnDate = async ({ userId, date }) => {
 //   try {
@@ -11,7 +10,7 @@ import { dateObjToString } from "../utils/DateUtils";
 // };
 const getTasks = async ({ userId, date }) => {
   try {
-    const response = await Axios.get(`/tasks/${userId}`, { date });
+    const response = await Axios.get(`/tasks/${userId}?date=${date}`);
     return response.data.message ? [] : response.data;
   } catch (error) {
     return [];

@@ -1,31 +1,31 @@
 import React from "react";
-import { useTasks } from "../../hooks/useTasks";
-import { Task } from "../../components/Task/Task";
-
-import { CalendarDay } from "../../components/CalendarDay/CalendarDay";
-import { useCalendar } from "../../hooks/useCalendar";
-import "./Calendar.scss";
-import { CalendarDays } from "./components/CalendarDays";
 import {
   PiArrowCircleLeftDuotone,
   PiArrowCircleRightDuotone,
 } from "react-icons/pi";
+import { useTasks } from "../../hooks/useTasks";
+import { useDate } from "../../hooks/useDate";
+import { Task } from "../../components/Task/Task";
+import { CalendarDay } from "../../components/CalendarDay/CalendarDay";
+import { CalendarDays } from "./components/CalendarDays";
+import { ContainerDeep } from "../../styled-components/ContainerDeep";
+import "./Calendar.scss";
 
 function Calendar() {
   const { data } = useTasks();
-  const { today, week, updateWeek } = useCalendar();
+  const { today, week, updateWeek } = useDate();
 
   return (
     <main className="calendar">
-      <div className="top-container">
-        <PiArrowCircleLeftDuotone />
-        <article className="tasks">
+      <ContainerDeep className="top-container">
+        <article>
           {data.map((task) => (
             <Task data={task} role="calendar" />
           ))}
+          <button>Add Task</button>
         </article>
-        <PiArrowCircleRightDuotone />
-      </div>
+      </ContainerDeep>
+
       <CalendarDays
         leftArrow={<PiArrowCircleLeftDuotone />}
         rightArrow={<PiArrowCircleRightDuotone />}

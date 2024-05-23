@@ -1,6 +1,6 @@
 import React from "react";
-import { getDay, getWeek, dateToObject } from "../utils/DateUtils";
-function useCalendar() {
+import { getDay, getWeek, dateToObject } from "../utils/date-utility";
+function useDate() {
   const [today, setToday] = React.useState(getDay());
   const [week, setWeek] = React.useState(getWeek());
 
@@ -13,4 +13,4 @@ function useCalendar() {
   };
 }
 
-export { useCalendar };
+export { useDate };

@@ -1,8 +1,10 @@
 import React from "react";
 import "./CalendarDay.scss";
-import { dateObjToString, getNameOfDay } from "../../utils/DateUtils";
+
 import { useNavigate } from "react-router-dom";
 import { PiDropSimpleThin } from "react-icons/pi";
+import { ContainerGlass } from "../../styled-components/ContainerGlass";
+import { dateObjToString, getNameOfDay } from "../../utils/date-utility";
 
 function CalendarDay(props) {
   const navigate = useNavigate();
@@ -10,7 +12,7 @@ function CalendarDay(props) {
   const { year, month, monthName, dayName, day } = data;
 
   return (
-    <section
+    <ContainerGlass
       className="calendar-day"
       onClick={(e) => navigate(`/day/${dateObjToString({ year, month, day })}`)}
     >
@@ -20,7 +22,7 @@ function CalendarDay(props) {
           ({monthName} {day})
         </p>
       </header>
-    </section>
+    </ContainerGlass>
   );
 }
 

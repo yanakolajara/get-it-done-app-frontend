@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import ScrollArea from "react-scrollbar";
 import { MdDragIndicator } from "react-icons/md";
 import "./Task.scss";
 // import { TiEdit } from "react-icons/ti";
@@ -37,6 +38,10 @@ function Task(props) {
       taskId: data.id,
     });
   };
+
+  useEffect(() => {
+    console.log("use Effect in task :)");
+  }, []);
 
   if (loading) {
     return onLoading();
@@ -79,7 +84,9 @@ function Task(props) {
               <input type="submit" value="Add Step" />
             </form>
           </header>
-          <section>{data.steps.map(children)}</section>
+          <ScrollArea vertical={true} horizontal={false}>
+            {data.steps.map(children)}
+          </ScrollArea>
           <footer>
             <p>0/{data.steps.length}</p>
           </footer>
@@ -91,11 +98,17 @@ function Task(props) {
           <header>
             <p>{data.content}</p>
           </header>
-          <article>{data.steps.map(children)}</article>
+
+          <ScrollArea
+            className="scroll-area"
+            vertical={true}
+            horizontal={false}
+          >
+            {data.steps.map((step) => children(step))}
+          </ScrollArea>
+
           <footer>
-            <p>
-              <p>0/{data.steps.length}</p>
-            </p>
+            <p>0/{data.steps.length}</p>
           </footer>
         </section>
       );

@@ -2,10 +2,12 @@ import { Step } from "../../components/Step/Step";
 import { Task } from "../../components/Task/Task";
 import { useTasks } from "../../hooks/useTasks";
 import "./Start.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import ScrollArea from "react-scrollbar";
 // import { processStepCompletion } from "../../utils/processStepCompletion";
 
 function Start() {
+  const [queries, setQueries] = useSearchParams();
   const {
     // loading,
     // onGetTask,
@@ -17,7 +19,11 @@ function Start() {
     data,
     onEditStep,
   } = useTasks();
-  const navigate = useNavigate();
+  const goToEdit = (e) => {
+    e.preventDefault();
+    setQueries({ status: "edit" });
+  };
+
   return (
     <main className="Start">
       <div className="Start__container container-glass">
@@ -27,7 +33,7 @@ function Start() {
           </Task>
         ))}
       </div>
-      <button onClick={() => navigate("/day")}>Back to Edit</button>
+      <button onClick={goToEdit}>Back to Edit</button>
     </main>
   );
 }

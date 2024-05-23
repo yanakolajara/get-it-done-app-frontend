@@ -1,0 +1,3 @@
+const tryCatch = () => {};
+
+export { tryCatch };

@@ -1,0 +1,49 @@
+.txt-xs {
+  font-size: 12px;
+}
+.txt-sm {
+  font-size: 14px;
+}
+.txt-md {
+  font-size: 16px;
+}
+.txt-lg {
+  font-size: 18px;
+}
+.txt-xl {
+  font-size: 20px;
+}
+
+.color {
+  &-primary {
+    color: $primary-color;
+  }
+  &-secondary {
+    color: $secondary-color;
+  }
+  &-accent {
+    color: $accent-color;
+  }
+  &-background {
+    color: $background-color;
+  }
+  &-text {
+    color: $text-color;
+  }
+}
+
+.pos {
+  &-vc {
+  }
+  &-hc {
+  }
+  &-c {
+  }
+}
+
+.stretch {
+  flex: 1 1 auto;
+}
+.schrink {
+  flex: 0 0 auto;
+}

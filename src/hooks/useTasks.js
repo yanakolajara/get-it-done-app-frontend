@@ -13,7 +13,7 @@ import {
   editStep,
   getTasksOnDate,
 } from "../api/api";
-import { dateObjToString, getDay } from "../utils/DateUtils";
+import { dateObjToString, getDay } from "../utils/date-utility";
 import { useParams } from "react-router-dom";
 
 function useTasks() {
@@ -43,7 +43,7 @@ function useTasks() {
 
   const onCreateTask = async ({ body }) => {
     try {
-      await createTask({ userId, body });
+      await createTask({ userId, body: { ...body, date } });
       setLoading(true);
     } catch (error) {
       return error;

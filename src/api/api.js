@@ -1,13 +1,5 @@
 import Axios from "./axios";
 
-// const getTasksOnDate = async ({ userId, date }) => {
-//   try {
-//     const response = await Axios.get(`/tasks/${userId}/${date}`);
-//     return response.data.message ? [] : response.data;
-//   } catch (error) {
-//     return [];
-//   }
-// };
 const getTasks = async ({ userId, date }) => {
   try {
     const response = await Axios.get(`/tasks/${userId}?date=${date}`);
@@ -35,7 +27,7 @@ const editTask = async ({ taskId, body }) => {
   }
 };
 
-const deleteTask = async ({ taskId }) => {
+const deleteTask = async (taskId) => {
   try {
     const response = await Axios.delete(`/tasks/${taskId}`);
     return response.data.message ? [] : response.data;
@@ -46,7 +38,7 @@ const deleteTask = async ({ taskId }) => {
 
 //* --------- childTasks ----------- *//
 
-const getSteps = async ({ taskId }) => {
+const getSteps = async (taskId) => {
   try {
     const response = await Axios.get(`/steps/${taskId}`);
     return response.data.message ? [] : response.data;
@@ -73,7 +65,7 @@ const editStep = async ({ stepId, body }) => {
   }
 };
 
-const deleteStep = async ({ stepId }) => {
+const deleteStep = async (stepId) => {
   try {
     const response = await Axios.delete(`/steps/${stepId}`);
     return response.data.message ? [] : response.data;

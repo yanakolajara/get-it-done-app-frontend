@@ -1,138 +1,82 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ScrollArea from "react-scrollbar";
-import { MdDragIndicator } from "react-icons/md";
 import "./Task.scss";
-// import { TiEdit } from "react-icons/ti";
-// import { RiDeleteBin5Fill } from "react-icons/ri";
-// import { completedStepsCount } from "../../utils/completedStepsCount";
+import { createStep, deleteTask, getSteps } from "../../api/api";
+import { dateObjToString, getDay } from "../../utils/date-utility";
 
-function Task(props) {
-  const [content, setContent] = React.useState("");
-  const [showForm, setShowForm] = React.useState(false);
-  const {
-    // onEdit,
-    data,
-    role,
-    onDelete,
-    onLoading,
-    createStep,
-    loading,
-    children,
-  } = props;
+export default function Task({ data, children, role }) {
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [steps, setSteps] = React.useState([]);
+  const [isEditing, setIsEditing] = React.useState(false);
+  const [content, setContent] = React.useState(data.content);
 
-  const handleSubmit = (e) => {
+  const fetchSteps = async () => {
+    await getSteps(data.id).then((data) => {
+      setSteps(data);
+      setIsLoading(false);
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    createStep({
+    await createStep({
       taskId: data.id,
       body: {
         content,
+        date: dateObjToString(getDay()),
       },
-    }).then(() => {
-      setContent("");
     });
+    setContent("");
   };
 
-  const deleteTask = (e) => {
+  const handleDelete = async (e) => {
     e.preventDefault();
-    onDelete({
+    await deleteTask({
       taskId: data.id,
     });
   };
 
-  useEffect(() => {
-    console.log("use Effect in task :)");
+  React.useEffect(() => {
+    fetchSteps();
   }, []);
 
-  if (loading) {
-    return onLoading();
+  if (isLoading) {
+    return <p>Loading...</p>;
   }
 
-  switch (role) {
-    case "static":
-      return (
-        <section className="static-task">
-          <MdDragIndicator className="static-task__drag-icon" />
-
-          <p className="static-task__content">{data.content}</p>
-          <div>
-            <button
-              className="btn task-static"
-              onClick={(e) => {
-                e.preventDefault();
-                setShowForm(!showForm);
-              }}
-            >
-              Edit
+  return (
+    <section className={`${role}-task`}>
+      <header>
+        {isEditing ? (
+          <>
+            <input
+              type="text"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+            <button type="submit" onClick={handleSubmit}>
+              Save
             </button>
-            <button className="btn static-del" onClick={deleteTask}>
-              Delete
-            </button>
-          </div>
-        </section>
-      );
-    case "container":
-      return (
-        <article className="container-task">
-          <header>
-            <p>{data.content}</p>
-            <form onSubmit={(e) => handleSubmit(e)}>
-              <input
-                type="text"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              />
-              <input type="submit" value="Add Step" />
-            </form>
-          </header>
-          <ScrollArea vertical={true} horizontal={false}>
-            {data.steps.map(children)}
-          </ScrollArea>
-          <footer>
-            <p>0/{data.steps.length}</p>
-          </footer>
-        </article>
-      );
-    case "start":
-      return (
-        <section className="start-task">
-          <header>
-            <p>{data.content}</p>
-          </header>
-
-          <ScrollArea
-            className="scroll-area"
-            vertical={true}
-            horizontal={false}
-          >
-            {data.steps.map((step) => children(step))}
-          </ScrollArea>
-
-          <footer>
-            <p>0/{data.steps.length}</p>
-          </footer>
-        </section>
-      );
-    case "calendar":
-      return (
-        <section className="calendar-task">
+          </>
+        ) : (
           <p>{data.content}</p>
-          <button
-            className="btn task-calendar"
-            onClick={(e) => {
-              e.preventDefault();
-              setShowForm(!showForm);
-            }}
-          >
-            Edit
-          </button>
-          <button className="btn calendar-del" onClick={deleteTask}>
-            Delete
-          </button>
-        </section>
-      );
-    default:
-      return null;
-  }
-}
+        )}
+      </header>
 
-export { Task };
+      <ScrollArea vertical={true} horizontal={false}>
+        {/* {steps.map()} */}
+      </ScrollArea>
+
+      <footer className="step-counter">
+        <p>{`0/${steps.length}`}</p>
+      </footer>
+
+      {["static", "calendar"].includes(role) && (
+        <div>
+          <button onClick={() => setIsEditing(!isEditing)}>Edit</button>
+          <button onClick={handleDelete}>Delete</button>
+        </div>
+      )}
+    </section>
+  );
+}

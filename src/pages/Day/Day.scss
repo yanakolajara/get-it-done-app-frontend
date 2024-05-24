@@ -1,19 +1,31 @@
 .day {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  min-height: 100dvh;
 }
 
-.container-glass {
-  /* From https://css.glass */
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(15.1px);
-  -webkit-backdrop-filter: blur(15.1px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: white;
+.containers {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.manage-tasks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+}
+.manage-steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 65%;
+
+  &__containers {
+    display: flex;
+    flex-direction: row;
+    width: stretch;
+    height: stretch;
+    justify-content: space-evenly;
+  }
 }

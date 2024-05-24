@@ -5,7 +5,7 @@ import React from "react";
 import "./Step.scss";
 // import Loader from "../Loader/Loader";
 
-function Step(props) {
+export default function Step(props) {
   // const [showForm, setShowForm] = React.useState(false);
   // const [content, setContent] = React.useState("");
   // const [loading, setLoading] = React.useState(false);
@@ -23,7 +23,7 @@ function Step(props) {
 
   // this.state.loading && <Loader />;
   switch (props.role) {
-    case "static":
+    case "manage-steps":
       return (
         <article className="static-step">
           <p className="static-step__content">{props.data.content}</p>
@@ -49,5 +49,3 @@ function Step(props) {
       return null;
   }
 }
-
-export { Step };

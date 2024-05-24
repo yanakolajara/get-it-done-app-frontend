@@ -1,4 +1,4 @@
-main {
+.calendar {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -9,12 +9,13 @@ main {
     width: 90%;
     height: 30%;
     align-items: center;
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
 
-    article {
-      justify-self: center;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr;
+    .tasks-container {
+      display: flex;
+      flex-wrap: nowrap;
       gap: 8px;
       height: 100%;
       width: 100%;

@@ -1,77 +1,60 @@
-import React from "react";
-import "./Day.scss";
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
-import { useTasks } from "../../hooks/useTasks";
+import React, { useEffect } from "react";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { createTask, deleteStep, getTasks } from "../../api/api";
+import { useAuth } from "../../hooks/useAuth";
+
 import Loader from "../../components/Loader/Loader";
-import { EditTasks } from "./EditTasks";
-import { EditSteps } from "./EditSteps";
-// import ListTask from "../../components/Task/components/TaskContainer";
-// import EditStepForm from "../../components/Task/components/EditStepsContainer/EditStepForm";
-// import NewStepForm from "../../components/Task/CreateStepForm";
-import { Task } from "../../components/Task/Task";
-import { Step } from "../../components/Step/Step";
-import { Start } from "../Start/Start";
-function Day() {
-  const navigate = useNavigate();
+import Task from "../../components/Task/Task";
+import Step from "../../components/Step/Step";
+import CreateTaskForm from "./CreateTaskForm";
+import Start from "../Start/Start";
+import { ContainerGlass } from "../../styled-components/ContainerGlass";
+import "./Day.scss";
+
+export function Day() {
+  const { date } = useParams();
+  const { userId } = useAuth();
+  const [tasks, setTasks] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [queries, setQueries] = useSearchParams();
-  const {
-    data: tasks,
-    loading,
-    // onGetTaskWithDate,
-    onCreateTask,
-    onEditTask,
-    onDeleteTask,
-    onCreateStep,
-    onEditStep,
-    onDeleteStep,
-    // onGetTask,
-  } = useTasks();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      await getTasks({ userId, date }).then((data) => {
+        setTasks(data);
+        setIsLoading(false);
+      });
+    };
+
+    fetchTasks();
+  }, [date, userId]);
 
   if (queries.get("status") === "start") return <Start />;
+  if (isLoading) return <Loader />;
+
   return (
-    <React.Fragment>
-      <div className="day">
-        <button onClick={() => navigate("/calendar")}>Back</button>
-        <EditTasks
-          tasks={tasks}
-          loading={loading}
-          onCreate={onCreateTask}
-          onLoading={() => <Loader />}
-        >
-          {(data) => (
-            <Task
-              data={data}
-              role="static"
-              onDelete={onDeleteTask}
-              onEdit={onEditTask}
-            />
-          )}
-        </EditTasks>
+    <main className="day">
+      <div className="containers">
+        <ContainerGlass className="manage-tasks">
+          <h1>{date}</h1>
+          <CreateTaskForm userId={userId} />
+          {tasks.map((task) => (
+            <Task key={task.id} data={task} role="static" />
+          ))}
+        </ContainerGlass>
 
-        <EditSteps tasks={tasks} loading={loading} onLoading={() => <Loader />}>
-          {(data) => (
-            <Task data={data} role="container" createStep={onCreateStep}>
-              {(data) => (
-                <Step
-                  data={data}
-                  role="static"
-                  onDelete={onDeleteStep}
-                  onEdit={onEditStep}
-                />
-              )}
-            </Task>
-          )}
-        </EditSteps>
-
-        <button onClick={() => setQueries({ status: "start" })}>Create</button>
+        <ContainerGlass className="manage-steps">
+          <h1>Staged Tasks</h1>
+          <article className="manage-steps__containers">
+            {tasks.map((task) => (
+              <Task key={task.id} data={task} role="container">
+                {(step) => console.log(step)}
+              </Task>
+            ))}
+          </article>
+        </ContainerGlass>
       </div>
-    </React.Fragment>
+    </main>
   );
 }
-
-export { Day };

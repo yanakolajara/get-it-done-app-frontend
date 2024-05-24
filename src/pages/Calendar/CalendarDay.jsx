@@ -1,7 +1,6 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { dateObjToString, getNameOfDay } from "../../utils/date-utility";
-import { ContainerGlass } from "../../styled-components/ContainerGlass";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { dateObjToString, getNameOfDay } from '../../utils/date-utility';
 
 export default function CalendarDay({
   data: { year, month, day, dayName, monthName },
@@ -28,8 +27,8 @@ export default function CalendarDay({
   }, []);
 
   return (
-    <ContainerGlass
-      className="calendar-day"
+    <section
+      className='calendar-day container-glass'
       onClick={() => navigate(`/day/${dateObjToString({ year, month, day })}`)}
     >
       <header>
@@ -42,6 +41,6 @@ export default function CalendarDay({
         {isLoading && onLoading()}
         {!isLoading && tasks.map(render)}
       </article>
-    </ContainerGlass>
+    </section>
   );
 }

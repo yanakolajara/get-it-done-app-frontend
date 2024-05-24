@@ -24,7 +24,7 @@ export default function CalendarDay({
       });
     };
     fetchTasks();
-  }, []);
+  }, [day, getTasks, month, userId, year]);
 
   return (
     <section

@@ -1,13 +1,13 @@
-import React from "react";
-import { getTasks } from "../../api/api";
-import { useDate } from "../../hooks/useDate";
-import { useAuth } from "../../hooks/useAuth";
-import CalendarDay from "./CalendarDay";
-import CalendarWeek from "./CalendarWeek";
-import TaskContainer from "./TaskContainer";
-import Task from "../../components/Task/Task";
-import Loader from "../../components/Loader/Loader";
-import "./Calendar.scss";
+import React from 'react';
+import { getTasks } from '../../api/api';
+import { useDate } from '../../hooks/useDate';
+import { useAuth } from '../../hooks/useAuth';
+import CalendarDay from './CalendarDay';
+import CalendarWeek from './CalendarWeek';
+import TaskContainer from './TaskContainer';
+import Task from '../../components/Task/Task';
+import Loader from '../../components/Loader/Loader';
+import './Calendar.scss';
 function Calendar() {
   const { userId } = useAuth();
   const { week, updateWeek } = useDate();
@@ -22,10 +22,10 @@ function Calendar() {
       });
     };
     onGetTasks(null);
-  }, []);
+  }, [userId]);
 
   return (
-    <main className="calendar">
+    <main className='calendar'>
       <TaskContainer
         tasks={tasks}
         isLoading={isLoading}
@@ -33,7 +33,7 @@ function Calendar() {
         render={(data) => (
           <Task
             data={data}
-            role="calendar_task-container"
+            role='calendar_task-container'
             onEdit={updateWeek}
             onDelete={updateWeek}
             onToggle={updateWeek}
@@ -52,7 +52,7 @@ function Calendar() {
             render={(data) => (
               <Task
                 data={data}
-                role="calendar_day-container"
+                role='calendar_day-container'
                 onEdit={updateWeek}
                 onDelete={updateWeek}
               />

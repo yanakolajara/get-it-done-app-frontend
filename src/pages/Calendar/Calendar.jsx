@@ -2,12 +2,12 @@ import React from "react";
 import { getTasks } from "../../api/api";
 import { useDate } from "../../hooks/useDate";
 import { useAuth } from "../../hooks/useAuth";
-import { CalendarDay } from "./components/CalendarDay";
+import CalendarDay from "./components/CalendarDay";
 import CalendarWeek from "./components/CalendarWeek";
 import TaskContainer from "./components/TaskContainer";
 import Task from "../../components/Task/Task";
-import "./Calendar.scss";
 import Loader from "../../components/Loader/Loader";
+import "./Calendar.scss";
 function Calendar() {
   const { userId } = useAuth();
   const { week, updateWeek } = useDate();

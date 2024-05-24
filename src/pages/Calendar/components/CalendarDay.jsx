@@ -2,9 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { dateObjToString, getNameOfDay } from "../../../utils/date-utility";
 import { ContainerGlass } from "../../../styled-components/ContainerGlass";
-import "./CalendarDay.scss";
 
-function CalendarDay({
+export default function CalendarDay({
   data: { year, month, day, dayName, monthName },
   userId,
   getTasks,
@@ -46,5 +45,3 @@ function CalendarDay({
     </ContainerGlass>
   );
 }
-
-export { CalendarDay };

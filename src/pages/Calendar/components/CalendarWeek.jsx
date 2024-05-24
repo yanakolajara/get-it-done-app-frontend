@@ -1,5 +1,4 @@
 import React from "react";
-import "./CalendarWeek.scss";
 
 export default function CalendarWeek({ week, render }) {
   return (

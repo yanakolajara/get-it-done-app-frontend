@@ -1,8 +1,8 @@
 import React from "react";
 import ScrollArea from "react-scrollbar";
-import "./Task.scss";
 import { createStep, deleteTask, getSteps } from "../../api/api";
 import { dateObjToString, getDay } from "../../utils/date-utility";
+import "./Task.scss";
 
 export default function Task({ data, children, role }) {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -45,22 +45,17 @@ export default function Task({ data, children, role }) {
   }
 
   return (
-    <section className={`${role}-task`}>
+    <section>
       <header>
-        {isEditing ? (
-          <>
-            <input
-              type="text"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            />
-            <button type="submit" onClick={handleSubmit}>
-              Save
-            </button>
-          </>
-        ) : (
-          <p>{data.content}</p>
-        )}
+        <input
+          type="text"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+        <button type="submit" onClick={handleSubmit}>
+          Save
+        </button>
+        <p>{data.content}</p>
       </header>
 
       <ScrollArea vertical={true} horizontal={false}>

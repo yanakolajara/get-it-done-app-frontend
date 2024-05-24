@@ -1,23 +1,20 @@
-import React, { useEffect } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { createTask, deleteStep, getTasks } from "../../api/api";
-import { useAuth } from "../../hooks/useAuth";
-
-import Loader from "../../components/Loader/Loader";
-import Task from "../../components/Task/Task";
-import Step from "../../components/Step/Step";
-import CreateTaskForm from "./CreateTaskForm";
-import Start from "../Start/Start";
-import { ContainerGlass } from "../../styled-components/ContainerGlass";
-import "./Day.scss";
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getTasks } from '../../api/api';
+import { useAuth } from '../../hooks/useAuth';
+import ManageTasks from './ManageTasks';
+import ManageSteps from './ManageSteps';
+import CreateTaskForm from './CreateTaskForm';
+import Task from '../../components/Task/Task';
+import Step from '../../components/Step/Step';
+import Loader from '../../components/Loader/Loader';
+import './Day.scss';
 
 export function Day() {
   const { date } = useParams();
   const { userId } = useAuth();
   const [tasks, setTasks] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [queries, setQueries] = useSearchParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -30,31 +27,29 @@ export function Day() {
     fetchTasks();
   }, [date, userId]);
 
-  if (queries.get("status") === "start") return <Start />;
-  if (isLoading) return <Loader />;
-
   return (
-    <main className="day">
-      <div className="containers">
-        <ContainerGlass className="manage-tasks">
-          <h1>{date}</h1>
-          <CreateTaskForm userId={userId} />
-          {tasks.map((task) => (
-            <Task key={task.id} data={task} role="static" />
-          ))}
-        </ContainerGlass>
+    <main className='day'>
+      <ManageTasks
+        tasks={tasks}
+        date={date}
+        isLoading={isLoading}
+        createTaskForm={() => <CreateTaskForm userId={userId} />}
+        onLoading={() => <Loader />}
+      >
+        {(data) => <Task key={data.id} data={data} role='manage-tasks' />}
+      </ManageTasks>
 
-        <ContainerGlass className="manage-steps">
-          <h1>Staged Tasks</h1>
-          <article className="manage-steps__containers">
-            {tasks.map((task) => (
-              <Task key={task.id} data={task} role="container">
-                {(step) => console.log(step)}
-              </Task>
-            ))}
-          </article>
-        </ContainerGlass>
-      </div>
+      <ManageSteps
+        tasks={tasks}
+        isLoading={isLoading}
+        onLoading={() => <Loader />}
+      >
+        {(task) => (
+          <Task key={task.id} data={task} role='manage-steps'>
+            {(data) => <Step data={data} role='manage-steps' />}
+          </Task>
+        )}
+      </ManageSteps>
     </main>
   );
 }

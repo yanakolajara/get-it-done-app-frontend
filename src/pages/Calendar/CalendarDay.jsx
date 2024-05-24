@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { dateObjToString, getNameOfDay } from "../../../utils/date-utility";
-import { ContainerGlass } from "../../../styled-components/ContainerGlass";
+import { dateObjToString, getNameOfDay } from "../../utils/date-utility";
+import { ContainerGlass } from "../../styled-components/ContainerGlass";
 
 export default function CalendarDay({
   data: { year, month, day, dayName, monthName },

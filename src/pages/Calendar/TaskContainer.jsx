@@ -1,5 +1,5 @@
 import React from "react";
-import { ContainerDeep } from "../../../styled-components/ContainerDeep";
+import { ContainerDeep } from "../../styled-components/ContainerDeep";
 
 export default function TaskContainer({ tasks, isLoading, onLoading, render }) {
   return (

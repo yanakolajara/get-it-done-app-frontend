@@ -3,35 +3,35 @@ import {
   getWeek,
   // dateToObject,
   dateObjToString,
-} from "../utils/DateUtils";
+} from '../date-utility.js';
 
-describe("Testing dateToObject()", () => {});
-describe("Testing dateObjToString()", () => {
-  it("should return a string", () => {
+describe('Testing dateToObject()', () => {});
+describe('Testing dateObjToString()', () => {
+  it('should return a string', () => {
     const dateObj = {
       year: 2003,
       month: 5,
       day: 20,
     };
     const result = dateObjToString(dateObj);
-    const expected = "2003-05-20";
+    const expected = '2003-05-20';
     expect(result).toEqual(expected);
   });
 });
 
-describe("Testing getDay()", () => {
-  it("should return an Object", () => {
+describe('Testing getDay()', () => {
+  it('should return an Object', () => {
     const result = getDay();
     const expected = Object;
     expect(result).toBeInstanceOf(expected);
   });
-  it("should return today", () => {
+  it('should return today', () => {
     const date = new Date();
     const result = getDay(0);
     const expected = date.getDate();
     expect(result.day).toEqual(expected);
   });
-  it("should return 8 days from today", () => {
+  it('should return 8 days from today', () => {
     const date = new Date();
     date.setDate(date.getDate() + 8);
     const result = getDay(8);
@@ -40,19 +40,19 @@ describe("Testing getDay()", () => {
   });
 });
 
-describe("Testing getWeek()", () => {
-  it("should return an Object", () => {
+describe('Testing getWeek()', () => {
+  it('should return an Object', () => {
     const result = getDay();
     const expected = Object;
     expect(result).toBeInstanceOf(expected);
   });
-  it("should return a week from monday to sunday", () => {
+  it('should return a week from monday to sunday', () => {
     const result = getWeek();
     const dayNumbers = result.map((date) => date.dayName);
     const expected = [1, 2, 3, 4, 5, 6, 0];
     expect(dayNumbers).toEqual(expected);
   });
-  it("should return this week", () => {
+  it('should return this week', () => {
     let weekTarget = new Date();
     weekTarget.setDate(weekTarget.getDate() - (weekTarget.getDay() || 7) + 1);
     let result = getWeek();
@@ -61,8 +61,8 @@ describe("Testing getWeek()", () => {
   });
 });
 
-describe("Testing NameOfDay()", () => {
-  it("should return a String", () => {
+describe('Testing NameOfDay()', () => {
+  it('should return a String', () => {
     const result = getWeek();
     const dayNumbers = result.map((date) => date.dayName);
     const expected = [1, 2, 3, 4, 5, 6, 0];

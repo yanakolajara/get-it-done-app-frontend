@@ -1,3 +1,0 @@
-const handleClick = () => {};
-
-export { handleClick };

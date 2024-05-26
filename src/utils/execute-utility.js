@@ -1,3 +1,0 @@
-const tryCatch = () => {};
-
-export { tryCatch };

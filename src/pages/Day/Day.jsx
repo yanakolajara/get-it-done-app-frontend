@@ -36,7 +36,7 @@ export function Day() {
         createTaskForm={() => <CreateTaskForm userId={userId} />}
         onLoading={() => <Loader />}
       >
-        {(data) => <Task key={data.id} data={data} role='manage-tasks' />}
+        {(data) => <Task key={data.id} data={data} role='task__item' />}
       </ManageTasks>
 
       <ManageSteps
@@ -45,8 +45,8 @@ export function Day() {
         onLoading={() => <Loader />}
       >
         {(task) => (
-          <Task key={task.id} data={task} role='manage-steps'>
-            {(data) => <Step data={data} role='manage-steps' />}
+          <Task key={task.id} data={task} role='task__container'>
+            {(data) => <Step data={data} role='step__manage-steps' />}
           </Task>
         )}
       </ManageSteps>

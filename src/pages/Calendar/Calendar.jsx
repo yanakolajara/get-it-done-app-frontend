@@ -33,7 +33,7 @@ function Calendar() {
         render={(data) => (
           <Task
             data={data}
-            role='calendar_task-container'
+            role='task__item'
             onEdit={updateWeek}
             onDelete={updateWeek}
             onToggle={updateWeek}
@@ -52,7 +52,7 @@ function Calendar() {
             render={(data) => (
               <Task
                 data={data}
-                role='calendar_day-container'
+                role='task__item'
                 onEdit={updateWeek}
                 onDelete={updateWeek}
               />

@@ -1,13 +1,8 @@
 @mixin task {
   display: flex;
+  border: 1px dotted black;
 }
-
-.static-task {
-  @include task;
-  padding: 0px 12px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+@mixin flat-container {
   color: white;
   text-shadow: 0px 0px 5px rgba($color: rgb(255, 255, 255), $alpha: 0.9) inset;
   background-color: rgba($color: silver, $alpha: 0.5);
@@ -15,202 +10,151 @@
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2),
     0px 0px 3px rgba(rgb(252, 252, 252), 0.5) inset;
   margin-bottom: 12px;
+}
+@mixin deep-container {
+  width: stretch;
+  padding: 6px;
+  border-radius: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
+}
 
-  &__drag-icon {
-    cursor: pointer;
-  }
-  &__options {
-    display: flex;
+.task {
+  &__container {
+    @include task;
+    @include deep-container;
     flex-direction: column;
-    align-items: center;
-    height: 100%;
-    width: 32px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    &__icon {
-      font-size: 20px;
-      &:hover {
-        cursor: pointer;
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-self: stretch;
+      align-items: stretch;
+      padding: 8px 8px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      background-color: rgba($color: #ffffff, $alpha: 0.3);
+      box-shadow: 0px 0px 4px rgba($color: #000000, $alpha: 0.2),
+        0px 0px 3px rgba($color: #ffffff, $alpha: 0.3) inset;
+
+      p {
+        text-align: center;
+        margin: 0px;
+        text-shadow: 0px 0px 4px rgba($color: #000000, $alpha: 0.4);
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        input[type='text'] {
+          padding: 4px 4px;
+          border: none;
+          box-shadow: 0px 0px 2px rgba($color: #000000, $alpha: 0.3) inset;
+          text-shadow: 0px 0px 8px rgba($color: #000000, $alpha: 0.3);
+          border-radius: 4px;
+          background: rgba($color: #000000, $alpha: 0.15);
+          text-align: center;
+          color: white;
+          &:focus {
+            outline: none;
+          }
+        }
+        input[type='submit'] {
+          height: 32px;
+          width: 100%;
+          margin-top: 8px;
+          border: 0;
+          border-radius: 6px;
+          background-color: rgba($color: #72c580, $alpha: 01);
+          box-shadow: 0px 0px 2px rgba($color: #000000, $alpha: 0.3),
+            0px 0px 1px rgba($color: #000000, $alpha: 0.5) inset;
+          color: white;
+          text-shadow: 0px 0px 4px rgba($color: #000000, $alpha: 0.4);
+          font-weight: bold;
+        }
       }
     }
   }
-  &__edit {
-    display: flex;
+  &__item {
+    @include task;
+    @include flat-container;
+    padding: 0px 12px;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    height: 52px;
-    width: 100%;
-    &__content {
-      height: 60%;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.1);
-      border-radius: 0.3rem;
-      border: 0px;
-      color: white;
-      font-size: 1.2em;
-      padding-left: 10px;
-    }
-    &__btn {
-      background: none;
-      border: none;
-      font-size: 1.5em;
-      &__cancel {
-        color: red;
-      }
-      &__submit {
-        color: #2eff74;
-      }
-    }
-  }
-  .step-counter {
-    display: none;
+    width: stretch;
   }
 }
 
-.container-task {
-  @include task;
-  flex-direction: column;
-  height: 70%;
-  width: 30%;
-  padding: 6px;
-  border-radius: 1rem;
-  background: rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
-  header {
-    display: flex;
-    flex-direction: column;
-    align-self: stretch;
-    align-items: stretch;
-    padding: 8px 8px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-    background-color: rgba($color: #ffffff, $alpha: 0.3);
-    box-shadow: 0px 0px 4px rgba($color: #000000, $alpha: 0.2),
-      0px 0px 3px rgba($color: #ffffff, $alpha: 0.3) inset;
+// .start-task {
+//   @include task;
+//   flex-direction: column;
+//   height: 100%;
+//   width: 30%;
+//   padding: 6px;
+//   border-radius: 1rem;
+//   background: rgba(0, 0, 0, 0.2);
+//   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
+//   header {
+//     display: flex;
+//     flex-direction: column;
+//     align-self: stretch;
+//     align-items: stretch;
+//     padding: 8px 8px;
+//     margin-bottom: 12px;
+//     border-radius: 8px;
+//     background-color: rgba($color: #ffffff, $alpha: 0.3);
+//     box-shadow: 0px 0px 4px rgba($color: #000000, $alpha: 0.2),
+//       0px 0px 3px rgba($color: #ffffff, $alpha: 0.3) inset;
 
-    p {
-      text-align: center;
-      margin: 0px;
-      text-shadow: 0px 0px 4px rgba($color: #000000, $alpha: 0.4);
-    }
+//     p {
+//       text-align: center;
+//       margin: 0px;
+//       text-shadow: 0px 0px 4px rgba($color: #000000, $alpha: 0.4);
+//     }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+//     form {
+//       display: flex;
+//       flex-direction: column;
+//       justify-content: center;
+//       align-items: center;
 
-      input[type="text"] {
-        padding: 4px 4px;
-        border: none;
-        box-shadow: 0px 0px 2px rgba($color: #000000, $alpha: 0.3) inset;
-        text-shadow: 0px 0px 8px rgba($color: #000000, $alpha: 0.3);
-        border-radius: 4px;
-        background: rgba($color: #000000, $alpha: 0.15);
-        text-align: center;
-        color: white;
-        &:focus {
-          outline: none;
-        }
-      }
-      input[type="submit"] {
-        height: 32px;
-        width: 100%;
-        margin-top: 8px;
-        border: 0;
-        border-radius: 6px;
-        background-color: rgba($color: #72c580, $alpha: 01);
-        box-shadow: 0px 0px 2px rgba($color: #000000, $alpha: 0.3),
-          0px 0px 1px rgba($color: #000000, $alpha: 0.5) inset;
-        color: white;
-        text-shadow: 0px 0px 4px rgba($color: #000000, $alpha: 0.4);
-        font-weight: bold;
-      }
-    }
-  }
-}
+//       input[type='text'] {
+//         padding: 4px 4px;
+//         border: none;
+//         box-shadow: 0px 0px 2px rgba($color: #000000, $alpha: 0.3) inset;
+//         text-shadow: 0px 0px 8px rgba($color: #000000, $alpha: 0.3);
+//         border-radius: 4px;
+//         background: rgba($color: #000000, $alpha: 0.15);
+//         text-align: center;
+//         color: white;
+//         &:focus {
+//           outline: none;
+//         }
+//       }
+//       input[type='submit'] {
+//         height: 32px;
+//         width: 100%;
+//         margin-top: 8px;
+//         border: 0;
+//         border-radius: 6px;
+//         background-color: rgba($color: #72c580, $alpha: 01);
+//         box-shadow: 0px 0px 2px rgba($color: #000000, $alpha: 0.3),
+//           0px 0px 1px rgba($color: #000000, $alpha: 0.5) inset;
+//         color: white;
+//         text-shadow: 0px 0px 4px rgba($color: #000000, $alpha: 0.4);
+//         font-weight: bold;
+//       }
+//     }
+//   }
 
-.start-task {
-  @include task;
-  flex-direction: column;
-  height: 100%;
-  width: 30%;
-  padding: 6px;
-  border-radius: 1rem;
-  background: rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
-  header {
-    display: flex;
-    flex-direction: column;
-    align-self: stretch;
-    align-items: stretch;
-    padding: 8px 8px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-    background-color: rgba($color: #ffffff, $alpha: 0.3);
-    box-shadow: 0px 0px 4px rgba($color: #000000, $alpha: 0.2),
-      0px 0px 3px rgba($color: #ffffff, $alpha: 0.3) inset;
-
-    p {
-      text-align: center;
-      margin: 0px;
-      text-shadow: 0px 0px 4px rgba($color: #000000, $alpha: 0.4);
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      input[type="text"] {
-        padding: 4px 4px;
-        border: none;
-        box-shadow: 0px 0px 2px rgba($color: #000000, $alpha: 0.3) inset;
-        text-shadow: 0px 0px 8px rgba($color: #000000, $alpha: 0.3);
-        border-radius: 4px;
-        background: rgba($color: #000000, $alpha: 0.15);
-        text-align: center;
-        color: white;
-        &:focus {
-          outline: none;
-        }
-      }
-      input[type="submit"] {
-        height: 32px;
-        width: 100%;
-        margin-top: 8px;
-        border: 0;
-        border-radius: 6px;
-        background-color: rgba($color: #72c580, $alpha: 01);
-        box-shadow: 0px 0px 2px rgba($color: #000000, $alpha: 0.3),
-          0px 0px 1px rgba($color: #000000, $alpha: 0.5) inset;
-        color: white;
-        text-shadow: 0px 0px 4px rgba($color: #000000, $alpha: 0.4);
-        font-weight: bold;
-      }
-    }
-  }
-
-  footer {
-    p {
-      text-align: center;
-      align-self: flex-end;
-    }
-  }
-}
-.calendar-task {
-  @include task;
-  padding: 0px 12px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-  text-shadow: 0px 0px 5px rgba($color: rgb(255, 255, 255), $alpha: 0.9) inset;
-  background-color: rgba($color: silver, $alpha: 0.5);
-  border-radius: 0.5rem;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2),
-    0px 0px 3px rgba(rgb(252, 252, 252), 0.5) inset;
-  margin-bottom: 12px;
-}
+//   footer {
+//     p {
+//       text-align: center;
+//       align-self: flex-end;
+//     }
+//   }
+// }

@@ -1,17 +1,21 @@
 import React from 'react';
 import { createTask } from '../../api/api';
-import { dateObjToString, getDay } from '../../utils/date-utility';
 
-export default function CreateTaskForm({ userId }) {
+export default function CreateTaskForm({ userId, setIsLoading, date }) {
   const [content, setContent] = React.useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
     const body = {
       content,
-      date: dateObjToString(getDay()),
+      date: date,
     };
+
+    console.log(userId);
+
+    console.log(body);
     await createTask({ userId, body });
     setContent('');
+    setIsLoading(true);
   };
   return (
     <form onSubmit={handleSubmit} className='create-task-form'>

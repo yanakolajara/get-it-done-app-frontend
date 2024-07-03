@@ -1,5 +1,4 @@
 import React from 'react';
-import ScrollArea from 'react-scrollbar';
 import { createStep, deleteTask, getSteps } from '../../api/api';
 import { dateObjToString, getDay } from '../../utils/date-utility';
 import CreateStepForm from './components/CreateStepForm';
@@ -52,11 +51,7 @@ export default function Task({
           <CreateStepForm />
         )}
       </header>
-      {/* {renderCriteria[role]?.includes('step-contaier') && (
-        <ScrollArea vertical={true} horizontal={false}>
-          {steps.map()}
-        </ScrollArea>
-      )} */}
+
       <div>
         {renderCriteria[role]?.includes('edit-btn') && (
           <button onClick={() => setIsEditing(true)}>Edit</button>

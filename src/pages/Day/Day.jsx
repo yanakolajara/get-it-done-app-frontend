@@ -24,16 +24,23 @@ export function Day() {
       });
     };
 
-    fetchTasks();
-  }, [date, userId]);
+    isLoading && fetchTasks();
+  }, [date, userId, isLoading]);
 
+  console.log(`hi`);
   return (
     <main className='day'>
       <ManageTasks
         tasks={tasks}
         date={date}
         isLoading={isLoading}
-        createTaskForm={() => <CreateTaskForm userId={userId} />}
+        createTaskForm={() => (
+          <CreateTaskForm
+            userId={userId}
+            setIsLoading={setIsLoading}
+            date={date}
+          />
+        )}
         onLoading={() => <Loader />}
       >
         {(data) => <Task key={data.id} data={data} role='task__item' />}

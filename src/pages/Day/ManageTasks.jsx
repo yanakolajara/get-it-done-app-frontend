@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function ManageTasks({
   date,
@@ -9,7 +9,7 @@ export default function ManageTasks({
   children,
 }) {
   return (
-    <article className="manage-tasks container-glass">
+    <article className='manage-tasks container-glass'>
       <h1>{date}</h1>
       {createTaskForm()}
       {isLoading && onLoading()}

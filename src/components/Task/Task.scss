@@ -12,11 +12,12 @@
   margin-bottom: 12px;
 }
 @mixin deep-container {
-  width: stretch;
   padding: 6px;
+  margin: 0px 10px;
   border-radius: 1rem;
   background: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3) inset;
+  width: 300px;
 }
 
 .task {
@@ -24,7 +25,7 @@
     @include task;
     @include deep-container;
     flex-direction: column;
-
+    min-width: 200px;
     header {
       display: flex;
       flex-direction: column;
